@@ -8,6 +8,7 @@
  * This software is provided "as is" without express or implied
  * warranty, and with no claim as to its suitability for any purpose.
  */
+#include <iostream>
 #include <string>
 #include <fstream>   // for ofstream
 #include <memory>    // for shared_ptr
@@ -23,7 +24,9 @@ class FileDeleter
     }
     void operator () (std::ofstream* fp) {
         fp->close();                   // close.file
+		std::cout << "file closed." << std::endl;
         std::remove(filename.c_str()); // delete file
+		std::cout << "filename removed." << std::endl;
     }
 };
 
