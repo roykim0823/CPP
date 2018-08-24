@@ -9,7 +9,7 @@ file(GLOB SRCS "src/*.cpp")
 
 #foreach(src IN LISTS SRCS)
 #	get_filename_component(filename ${src} NAME)
-##	string(REPLACE "." ";" temp ${filename})
+#	string(REPLACE "." ";" temp ${filename})
 #	list(GET temp 0 target)
 #	#message(STATUS "${target}")
 #	add_executable(${target} ${src})
@@ -28,5 +28,5 @@ add_executable(stack3test "src/stack3test.cpp")
 
 # Chapter 3
 add_executable(stacknontype "src/stacknontype.cpp")
-#add_executable(stackauto "src/stackauto.cpp") 	# compile error
-#add_executable(message "src/message.cpp") 	# compile error
+add_executable(stackauto "src/stackauto.cpp") 	# compile error
+add_executable(message "src/message.cpp") 	# compile error
