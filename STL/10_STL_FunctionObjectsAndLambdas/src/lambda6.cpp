@@ -11,7 +11,7 @@
 #include <string>
 #include <iostream>
 #include <unordered_set>
-#include "../cont/hashval.hpp"
+#include "hashval.hpp"
 #include <functional>
 #include "print.hpp"
 using namespace std;
