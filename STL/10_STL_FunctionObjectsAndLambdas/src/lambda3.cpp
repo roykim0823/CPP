@@ -23,8 +23,9 @@ int main()
     list<int>::iterator pos;
     int count=0;     // call counter
     pos = remove_if(coll.begin(),coll.end(),   // range
-//                    [count] (int) mutable {   // remove criterion
-                    [&count] (int)  {   // remove criterion
+                    [count] (int) mutable {   // remove criterion
+                    //[count] (int) {   // compilation error without mutable
+                    //[&count] (int)  {   // remove criterion
                         return ++count == 3;
                     });
     coll.erase(pos,coll.end());
