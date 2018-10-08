@@ -1,0 +1,7 @@
+set_source_files_properties(src/template_example_templatized_cpp14.cpp PROPERTIES COMPILE_FLAGS -std=c++14)
+
+add_executable(pointer_overload src/pointer_overload.cpp)
+add_executable(code_clarity src/code_clarity.cpp)
+add_executable(template_example_flat src/template_example_flat.cpp)
+add_executable(template_example_templatized src/template_example_templatized.cpp)
+add_executable(template_example_templatized_cpp14 src/template_example_templatized_cpp14.cpp)

@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/roy/study/DataStructure/06_BinaryTrees/src/main.cpp" "/home/roy/study/DataStructure/06_BinaryTrees/build/CMakeFiles/tests.dir/src/main.cpp.o"
+  "/home/roy/study/CPP/DataStructure/06_BinaryTrees/src/main.cpp" "/home/roy/study/CPP/DataStructure/06_BinaryTrees/build/CMakeFiles/tests.dir/src/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

@@ -22,7 +22,8 @@ void consume_queue_items()
         int item_index;
         if ((item_index=count.fetch_sub(1,std::memory_order_acquire)) <= 0) {
             // wait_for_more_items();
-            continue;
+            //continue;
+            break;
         }
         // process(queue_data[item_index-1]);
     }

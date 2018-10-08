@@ -19,7 +19,8 @@ int main()
   // provide our own hash function:
   struct MyCustomerHash {
     // NOTE: missing const is only an error with g++ and clang:
-    std::size_t operator() (Customer const& c) {
+    //std::size_t operator() (Customer const& c) {
+    std::size_t operator() (Customer const& c) const { 	// fix
       return std::hash<std::string>()(c.getName());
     }
   };

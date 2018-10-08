@@ -1,6 +1,11 @@
+cmake_minimum_required(VERSION 2.8)
+project(Adapter)
+
+include_directories(include)
+
 set(adapter_SRCS
-    TextManipulator.cpp
-    TextView.cpp)
+    src/TextManipulator.cpp
+    src/TextView.cpp)
 
 add_library(adapter SHARED ${adapter_SRCS})
 

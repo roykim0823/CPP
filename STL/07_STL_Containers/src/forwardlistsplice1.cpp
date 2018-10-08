@@ -34,10 +34,12 @@ int main()
     }
 
     // splice 3 from l1 to l2 before 99
-    //l1.splice_after(pos2, l2,  // destination
-    //                pos1);     // source
-    l2.splice_after(pos2, l1,  // destination
+    l1.splice_after(pos2, l2,  // destination
                     pos1);     // source
+	
+	// Same result
+    //l2.splice_after(pos2, l1,  // destination
+    //                pos1);     // source
 
     PRINT_ELEMENTS(l1,"l1: ");
     PRINT_ELEMENTS(l2,"l2: ");
