@@ -66,7 +66,6 @@ void BinaryHeap<T>::sort(array<T> &b) {
 	b.reverse();
 }
 
-
 template<class T>
 bool BinaryHeap<T>::add(T x) {
 	if (n + 1 > a.length) resize();
@@ -74,8 +73,6 @@ bool BinaryHeap<T>::add(T x) {
 	bubbleUp(n-1);
 	return true;
 }
-
-
 
 template<class T>
 void BinaryHeap<T>::bubbleUp(int i) {
@@ -87,8 +84,6 @@ void BinaryHeap<T>::bubbleUp(int i) {
 	}
 }
 
-
-
 template<class T>
 T BinaryHeap<T>::remove() {
 	T x = a[0];
@@ -97,8 +92,6 @@ T BinaryHeap<T>::remove() {
 	if (3*n < a.length) resize();
 	return x;
 }
-
-
 
 template<class T>
 void BinaryHeap<T>::trickleDown(int i) {
@@ -123,14 +116,10 @@ void BinaryHeap<T>::trickleDown(int i) {
 	} while (i >= 0);
 }
 
-
-
 template<class T>
 BinaryHeap<T>::BinaryHeap() : a(1) {
 	n = 0;
 }
-
-
 
 template<class T>
 BinaryHeap<T>::BinaryHeap(array<T> &b) : a(0) {
@@ -141,14 +130,10 @@ BinaryHeap<T>::BinaryHeap(array<T> &b) : a(0) {
 	}
 }
 
-
-
 template<class T>
 BinaryHeap<T>::~BinaryHeap() {
 	// nothing to do
 }
-
-
 
 template<class T>
 void BinaryHeap<T>::clear() {
