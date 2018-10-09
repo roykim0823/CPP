@@ -1,4 +1,4 @@
-# Install script for directory: /home/roy/study/DataStructure/06_BinaryTrees
+# Install script for directory: /home/roy/study/CPP/DataStructure/06_BinaryTrees
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/roy/study/DataStructure/06_BinaryTrees/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/roy/study/CPP/DataStructure/06_BinaryTrees/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

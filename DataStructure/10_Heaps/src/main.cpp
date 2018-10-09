@@ -85,7 +85,7 @@ void ssetTests(SSet &ss, int n, unsigned flags) {
 	stop = clock();
 	cout << "done (" << ((double)(stop-start))/CLOCKS_PER_SEC << "s)" << endl;
 
-//	cout << "Running binary tree tests...";
+	cout << "Running binary tree tests...";
 //	cout.flush();
 //	start = clock();
 //	btTests(ss);

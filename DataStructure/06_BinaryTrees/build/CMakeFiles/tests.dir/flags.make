@@ -6,5 +6,5 @@ CXX_FLAGS = -g -Wall
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/roy/study/DataStructure/06_BinaryTrees/include 
+CXX_INCLUDES = -I/home/roy/study/CPP/DataStructure/06_BinaryTrees/include 
 

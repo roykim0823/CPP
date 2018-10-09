@@ -68,12 +68,12 @@ void ssetTests(SSet &ss, int n, unsigned flags) {
 	stop = clock();
 	cout << "done (" << ((double)(stop-start))/CLOCKS_PER_SEC << "s)" << endl;
 
-//	cout << "Running binary tree tests...";
-//	cout.flush();
-//	start = clock();
-//	btTests(ss);
-//	stop = clock();
-//	cout << "done (" << ((double)(stop-start))/CLOCKS_PER_SEC << "s)" << endl;
+	cout << "Running binary tree tests...";
+	cout.flush();
+	start = clock();
+	btTests(ss);
+	stop = clock();
+	cout << "done (" << ((double)(stop-start))/CLOCKS_PER_SEC << "s)" << endl;
 
 	cout << "Removing " << n << " elements...";
 	cout.flush();
@@ -119,6 +119,7 @@ int main(int argc, char **argv)
 
 	{
 		BinarySearchTree<BSTNode1<int>,int> s;
+		btTests(s);
 		ssetTests(s, n, 0x0);
 	}
 

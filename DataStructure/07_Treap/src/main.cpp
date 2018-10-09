@@ -12,17 +12,8 @@
 #include <iostream>
 using namespace std;
 
-#include "ArrayDeque.h"
-
-#include "BinaryTree.h"
-#include "BinarySearchTree.h"
 #include "Treap.h"
 //#include "ScapegoatTree.h"
-//#include "RedBlackTree.h"
-//#include "BTree.h"
-//#include "BinaryHeap.h"
-
-//#include "BinaryTrie.h"
 
 using namespace ods;
 
@@ -68,12 +59,12 @@ void ssetTests(SSet &ss, int n, unsigned flags) {
 	stop = clock();
 	cout << "done (" << ((double)(stop-start))/CLOCKS_PER_SEC << "s)" << endl;
 
-//	cout << "Running binary tree tests...";
-//	cout.flush();
-//	start = clock();
-//	btTests(ss);
-//	stop = clock();
-//	cout << "done (" << ((double)(stop-start))/CLOCKS_PER_SEC << "s)" << endl;
+	cout << "Running binary tree tests...";
+	cout.flush();
+	start = clock();
+	btTests(ss);
+	stop = clock();
+	cout << "done (" << ((double)(stop-start))/CLOCKS_PER_SEC << "s)" << endl;
 
 	cout << "Removing " << n << " elements...";
 	cout.flush();
@@ -100,11 +91,13 @@ int main(int argc, char **argv)
 
 	srand(0);
 
+  	cout << endl << "Treap<int>:" << endl;
+   	Treap1<int> t;
+   	ssetTests(t, n, 0x0);
 
-		cout << endl << "Treap<int>:" << endl;
-		Treap1<int> t;
-		btTests(t);
-		ssetTests(t, n, 0x0);
+//   	cout << endl << "ScapegoatTree<int>:" << endl;
+//  	ScapegoatTree1<int> t2;
+//   	ssetTests(t2, n, 0x0);
 
 	return 0;
 }

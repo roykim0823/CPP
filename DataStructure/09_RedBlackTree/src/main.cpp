@@ -8,13 +8,11 @@
 #include <cassert>
 #include <ctime>
 #include <cstdlib>
-
 #include <iostream>
 using namespace std;
-
 #include "RedBlackTree.h"
-
 using namespace ods;
+
 
 #ifndef CLOCKS_PER_SEC
 #define CLOCKS_PER_SEC 1000
@@ -84,12 +82,12 @@ void ssetTests(SSet &ss, int n, unsigned flags) {
 	stop = clock();
 	cout << "done (" << ((double)(stop-start))/CLOCKS_PER_SEC << "s)" << endl;
 
-//	cout << "Running binary tree tests...";
-//	cout.flush();
-//	start = clock();
-//	btTests(ss);
-//	stop = clock();
-//	cout << "done (" << ((double)(stop-start))/CLOCKS_PER_SEC << "s)" << endl;
+	cout << "Running binary tree tests...";
+	cout.flush();
+	start = clock();
+	btTests(ss);
+	stop = clock();
+	cout << "done (" << ((double)(stop-start))/CLOCKS_PER_SEC << "s)" << endl;
 
 	cout << "Removing " << n << " elements...";
 	cout.flush();
@@ -117,24 +115,9 @@ int main(int argc, char **argv)
 
 	srand(0);
 
-	/*
-	{
-		cout << endl << "BinaryHeap<int>:" << endl;
-		BinaryHeap<int> h;
-		heapTests(h, n);
-	}
-
-	{
-		cout << endl << "MeldableHeap<int>:" << endl;
-		MeldableHeap1<int> h;
-		heapTests(h, n);
-	}
-	*/
-
 	{
 		cout << endl << "RedBlackTree<int>:" << endl;
 		RedBlackTree1<int> t;
-		btTests(t);
 		ssetTests(t, n, 0x0);
 	}
 

@@ -12,8 +12,8 @@
 #include <iostream>
 using namespace std;
 
+//#include "Treap.h"
 #include "ScapegoatTree.h"
-//#include "RedBlackTree.h"
 
 using namespace ods;
 
@@ -32,32 +32,6 @@ void btTests(Tree &t) {
 	t.bfTraverse();
 	t.traverse();
 	t.traverse2();
-}
-
-template<class Heap>
-void heapTests(Heap &h, int n) {
-	clock_t start, stop;
-	cout << "Adding " << n << " elements...";
-	cout.flush();
-	start = clock();
-	for (int i = 0; i < n; i++) {
-		h.add(rand()%100);
-	}
-	stop = clock();
-	cout << "done (" << ((double)(stop-start))/CLOCKS_PER_SEC << "s)" << endl;
-
-	cout << "Removing " << n << " elements...";
-	cout.flush();
-	start = clock();
-	int p = h.remove();
-	for (int i = 1; i < n; i++) {
-		assert(h.size() == n-i);
-		int q = h.remove();
-		assert(p <= q);
-		p = q;
-	}
-	stop = clock();
-	cout << "done (" << ((double)(stop-start))/CLOCKS_PER_SEC << "s)" << endl;
 }
 
 template <class SSet>
@@ -85,12 +59,12 @@ void ssetTests(SSet &ss, int n, unsigned flags) {
 	stop = clock();
 	cout << "done (" << ((double)(stop-start))/CLOCKS_PER_SEC << "s)" << endl;
 
-//	cout << "Running binary tree tests...";
-//	cout.flush();
-//	start = clock();
-//	btTests(ss);
-//	stop = clock();
-//	cout << "done (" << ((double)(stop-start))/CLOCKS_PER_SEC << "s)" << endl;
+	cout << "Running binary tree tests...";
+	cout.flush();
+	start = clock();
+	btTests(ss);
+	stop = clock();
+	cout << "done (" << ((double)(stop-start))/CLOCKS_PER_SEC << "s)" << endl;
 
 	cout << "Removing " << n << " elements...";
 	cout.flush();
@@ -111,39 +85,19 @@ void ssetTests(SSet &ss, int n, unsigned flags) {
 	cout << "done (" << ((double)(stop-start))/CLOCKS_PER_SEC << "s)" << endl;
 }
 
-
 int main(int argc, char **argv)
 {
 	int n = 1000000;
 
 	srand(0);
 
-	/*
-	{
-		cout << endl << "BinaryHeap<int>:" << endl;
-		BinaryHeap<int> h;
-		heapTests(h, n);
-	}
+//  	cout << endl << "Treap<int>:" << endl;
+//   	Treap1<int> t;
+//   	ssetTests(t, n, 0x0);
 
-	{
-		cout << endl << "MeldableHeap<int>:" << endl;
-		MeldableHeap1<int> h;
-		heapTests(h, n);
-	}
-
-	{
-		cout << endl << "RedBlackTree<int>:" << endl;
-		RedBlackTree1<int> t;
-		btTests(t);
-		ssetTests(t, n, 0x0);
-	}
-    */
-	{
-		cout << endl << "ScapegoatTree<int>:" << endl;
-		ScapegoatTree1<int> t;
-		btTests(t);
-		ssetTests(t, n, 0x0);
-	}
+   	cout << endl << "ScapegoatTree<int>:" << endl;
+  	ScapegoatTree1<int> t2;
+   	ssetTests(t2, n, 0x0);
 
 	return 0;
 }
