@@ -29,10 +29,15 @@ void doSomething (std::promise<std::string>& p)
         //...
         std::string s = std::string("char ") + c + " processed";
         p.set_value(std::move(s));    // store result
+		// shared state to becomre ready when the thread really ends
+		//p.set_value_at_thread_exit(std::move(s));	
     }
     catch (...) {
         p.set_exception(std::current_exception());  // store exception
+		// shared state to becomre ready when the thread really ends
+        //p.set_exception_at_thread_exit(std::current_exception());  
     }
+
 }
 
 int main()
