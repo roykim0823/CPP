@@ -28,6 +28,7 @@ void provider (int val)
             queue.push(val+i);
         } // release lock
         queueCondVar.notify_one();
+        //queueCondVar.notify_all(); // one of consumer will get most of notifications.
 
         std::this_thread::sleep_for(std::chrono::milliseconds(val));
     }
@@ -43,8 +44,10 @@ void consumer (int num)
             queueCondVar.wait(ul,[]{ return !queue.empty(); });
             val = queue.front();
             queue.pop();
+			// no interleaving output
+        	std::cout << "consumer " << num << ": " << val << std::endl;
         } // release lock
-        std::cout << "consumer " << num << ": " << val << std::endl;
+//        std::cout << "consumer " << num << ": " << val << std::endl;
     }
 }
 
