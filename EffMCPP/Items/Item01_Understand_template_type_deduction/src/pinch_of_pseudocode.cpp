@@ -11,8 +11,12 @@
  *   e.g., const- or reference qualifiers.
  */
 
+#include <iostream>
 template<typename T>
-void f(const T& param) {}  // ParamType is const T&
+void f(const T& param) { 
+	// param=2; 	// Compilation Error
+	std::cout << param << std::endl;
+}  // ParamType is const T&
 
 int main()
 {

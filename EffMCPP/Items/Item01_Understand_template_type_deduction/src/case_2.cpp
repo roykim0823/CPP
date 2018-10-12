@@ -36,5 +36,5 @@ int main()
                           // param's type is also const int&
 
   f(27);                  // 27 is rvalue, so T is int,
-                          // param's type is therefore int&&
+                          // param's type is therefore int&& !
 }

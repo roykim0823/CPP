@@ -1,29 +1,17 @@
-set_source_files_properties(
-    pinch_of_pseudocode.cpp
-    case1_const.cpp
-    case1_non_const.cpp
-    case1_pointer.cpp
-    case2_uref.cpp
-    case3_pass_by_value.cpp
-    array-to-pointer_decay_rule.cpp
-    arrays_by_value.cpp
-    arrays_by_reference.cpp
-    function-to-pointer_decay_rule.cpp
-    deduce_nb_array_elements.cpp
-    array_and_pointer_parameter_equivalence.cpp
-    PROPERTIES COMPILE_FLAGS -std=c++11
-)
+cmake_minimum_required(VERSION 2.8)
+project(item01)
 
-add_executable(pinch_of_pseudocode pinch_of_pseudocode.cpp)
-add_executable(case1_const case1_const.cpp)
-add_executable(case1_non_const case1_non_const.cpp)
-add_executable(case1_pointer case1_pointer.cpp)
-add_executable(case2_uref case2_uref.cpp)
-add_executable(case3_pass_by_value case3_pass_by_value.cpp)
-add_executable(array-to-pointer_decay_rule array-to-pointer_decay_rule.cpp)
-add_executable(arrays_by_value arrays_by_value.cpp)
-add_executable(arrays_by_reference arrays_by_reference.cpp)
-add_executable(function-to-pointer_decay_rule function-to-pointer_decay_rule.cpp)
+set(CMAKE_CXX_FLAGS "-std=c++1z -g -Wall -pthread")
 
-add_library(item01 deduce_nb_array_elements.cpp
-                   array_and_pointer_parameter_equivalence.cpp)
+include_directories(include)
+file(GLOB SRCS "src/*.cpp")
+
+foreach(src IN LISTS SRCS) 
+	message(STATUS "${src}")
+	get_filename_component(filename ${src} NAME)
+	string(REPLACE "." ";" temp ${filename})
+	list(GET temp 0 target)
+	add_executable(${target} ${src})
+	target_link_libraries(${target} rt)
+	list(APPEND TARGET_LIST ${target})
+endforeach()
