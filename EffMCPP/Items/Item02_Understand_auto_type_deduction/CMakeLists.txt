@@ -1,13 +1,17 @@
-set_source_files_properties(
-    auto_type_deduction.cpp
-    auto_deduction_vs_template_deduction.cpp
-    PROPERTIES COMPILE_FLAGS -std=c++11
-)
-set_source_files_properties(
-    function_return_type_deduction.cpp
-    PROPERTIES COMPILE_FLAGS -std=c++14
-)
+cmake_minimum_required(VERSION 2.8)
+project(item01)
 
-add_executable(auto_type_deduction auto_type_deduction.cpp)
-add_executable(auto_deduction_vs_template_deduction auto_deduction_vs_template_deduction.cpp)
-add_executable(function_return_type_deduction function_return_type_deduction.cpp)
+set(CMAKE_CXX_FLAGS "-std=c++1z -g -Wall -pthread")
+
+include_directories(include)
+file(GLOB SRCS "src/*.cpp")
+
+foreach(src IN LISTS SRCS) 
+	message(STATUS "${src}")
+	get_filename_component(filename ${src} NAME)
+	string(REPLACE "." ";" temp ${filename})
+	list(GET temp 0 target)
+	add_executable(${target} ${src})
+	target_link_libraries(${target} rt)
+	list(APPEND TARGET_LIST ${target})
+endforeach()

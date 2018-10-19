@@ -34,7 +34,6 @@ int main()
   auto&& uref3 = 27;          // 27 is int and rvalue,
                               // so uref3's type is int&&
 
-
   func_for_x(27);             // conceptual call: param's
                               // deduced type is x's type
 
@@ -57,5 +56,4 @@ int main()
 
   auto& func2 = someFunc;     // func2's type is
                               // void (&)(int, double)
-
 }
