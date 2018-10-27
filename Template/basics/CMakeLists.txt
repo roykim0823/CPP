@@ -28,5 +28,12 @@ add_executable(stack3test "src/stack3test.cpp")
 
 # Chapter 3
 add_executable(stacknontype "src/stacknontype.cpp")
-add_executable(stackauto "src/stackauto.cpp") 	# compile error
-add_executable(message "src/message.cpp") 	# compile error
+add_executable(stackauto "src/stackauto.cpp") 	
+add_executable(message "src/message.cpp") 	
+
+# Chapter 6: Move Semantics
+add_executable(move1 					"src/move1.cpp")
+add_executable(move2 					"src/move2.cpp") 	
+add_executable(specialmemtmpl1 			"src/specialmemtmpl1.cpp") 	
+add_executable(specialmemtmpl2 			"src/specialmemtmpl2.cpp") 	
+add_executable(specialmemtmpl3 			"src/specialmemtmpl3.cpp") 	
