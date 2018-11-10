@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/stacknontype.hpp
+array
+-
+cassert
+-
+
+/home/roy/study/CPP/Template/basics/src/stacknontype.cpp
+stacknontype.hpp
+/home/roy/study/CPP/Template/basics/src/stacknontype.hpp
+iostream
+-
+string
+-
+

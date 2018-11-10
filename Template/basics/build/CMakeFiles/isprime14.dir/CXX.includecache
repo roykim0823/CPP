@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/isprime14.hpp
+
+/home/roy/study/CPP/Template/basics/src/isprime14.cpp
+utility
+-
+string
+-
+iostream
+-
+isprime14.hpp
+/home/roy/study/CPP/Template/basics/src/isprime14.hpp
+

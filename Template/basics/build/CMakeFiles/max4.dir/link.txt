@@ -1,0 +1,1 @@
+/usr/bin/c++  -std=c++1z -g -Wall  -rdynamic CMakeFiles/max4.dir/src/max4.cpp.o  -o max4 

@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/varprint1.hpp
+iostream
+-
+
+/home/roy/study/CPP/Template/basics/src/varprint1.cpp
+varprint1.hpp
+/home/roy/study/CPP/Template/basics/src/varprint1.hpp
+string
+-
+

@@ -1,4 +1,5 @@
 #include <cstring>
+#include <iostream>
 
 // maximum of two values of any type (call-by-reference)
 template<typename T>
@@ -23,9 +24,13 @@ T const& max (T const& a, T const& b, T const& c)
 int main ()
 {
   auto m1 = ::max(7, 42, 68);     // OK
+  std::cout << m1 << std::endl;
+
 
   char const* s1 = "frederic";
   char const* s2 = "anica";
   char const* s3 = "lucas";
   auto m2 = ::max(s1, s2, s3);    // run-time ERROR
+  // g++ shows warning: returning reference to temporary
+  std::cout << m2 << std::endl;
 }

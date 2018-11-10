@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/specialmemtmpl2.hpp
+utility
+-
+string
+-
+iostream
+-
+
+/home/roy/study/CPP/Template/basics/src/specialmemtmpl2.cpp
+utility
+-
+string
+-
+iostream
+-
+specialmemtmpl2.hpp
+/home/roy/study/CPP/Template/basics/src/specialmemtmpl2.hpp
+

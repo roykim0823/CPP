@@ -1,0 +1,1 @@
+/usr/bin/c++  -std=c++1z -g -Wall  -rdynamic CMakeFiles/stack3test.dir/src/stack3test.cpp.o  -o stack3test 
