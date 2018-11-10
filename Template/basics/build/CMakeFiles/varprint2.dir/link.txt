@@ -1,1 +1,0 @@
-/usr/bin/c++  -std=c++1z -g -Wall  -rdynamic CMakeFiles/varprint2.dir/src/varprint2.cpp.o  -o varprint2 

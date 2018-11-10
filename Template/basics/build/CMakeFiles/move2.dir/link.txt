@@ -1,1 +1,0 @@
-/usr/bin/c++  -std=c++1z -g -Wall  -rdynamic CMakeFiles/move2.dir/src/move2.cpp.o  -o move2 

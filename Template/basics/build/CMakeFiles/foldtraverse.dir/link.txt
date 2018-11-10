@@ -1,1 +1,0 @@
-/usr/bin/c++  -std=c++1z -g -Wall  -rdynamic CMakeFiles/foldtraverse.dir/src/foldtraverse.cpp.o  -o foldtraverse 

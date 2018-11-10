@@ -1,1 +1,0 @@
-/usr/bin/c++  -std=c++1z -g -Wall  -rdynamic CMakeFiles/specialmemtmpl1.dir/src/specialmemtmpl1.cpp.o  -o specialmemtmpl1 

@@ -1,1 +1,0 @@
-/usr/bin/c++  -std=c++1z -g -Wall  -rdynamic CMakeFiles/max3val.dir/src/max3val.cpp.o  -o max3val 
