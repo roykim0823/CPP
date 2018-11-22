@@ -55,5 +55,14 @@ add_executable(cref			"src/cref.cpp")
 add_executable(isprime		"src/isprime.cpp")
 add_executable(isprime11   	"src/isprime11.cpp")
 add_executable(isprime14   	"src/isprime14.cpp")
+
+# Chapter 9
+#add_executable(myfirst		"src/myfirst.cpp" "src/myfirstmain.cpp") 	# linking error
+add_executable(myfirst_rev 	"src/myfirstmain_rev.cpp") 		   			# fix myfirst
 add_executable(errornovel1   	"src/errornovel1.cpp")
 add_executable(errornovel2   	"src/errornovel2.cpp")
+
+# Chapter 11
+add_executable(foreach   		"src/foreach.cpp")
+add_executable(foreachinvoke   	"src/foreachinvoke.cpp")
+
