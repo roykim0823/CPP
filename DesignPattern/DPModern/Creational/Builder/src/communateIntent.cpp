@@ -14,13 +14,6 @@ struct HtmlElement
   vector<HtmlElement> elements;
   const size_t indent_size = 2;
 
-  HtmlElement() {}
-  HtmlElement(const string& name, const string& text)
-    : name(name),
-    text(text)
-  {
-  }
-
   string str(int indent = 0) const
   {
     ostringstream oss;
@@ -35,9 +28,27 @@ struct HtmlElement
     oss << i << "</" << name << ">" << endl;
     return oss.str();
   }
+
+  // Factory Method
+  static unique_ptr<HtmlBuilder> build(string root_name)
+  {
+    return make_unique<HtmlBuilder>(root_name);
+  }
+
+protected:	
+  friend class HtmlBuilder;	// to access constructors in HtmlBuilder
+ 
+  // hide all constructors (or private) 
+  // so, builder is the only way to construct HtmlElement
+  // -> force users to use the builder
+  HtmlElement() {}
+  HtmlElement(const string& name, const string& text)
+    : name(name),
+    text(text)
+  {
+  }
 };
 
-// fluent builder
 struct HtmlBuilder
 {
   HtmlBuilder(string root_name)
@@ -53,37 +64,27 @@ struct HtmlBuilder
     return *this;
   }
 
-  // pointer based
-  HtmlBuilder* add_child_2(string child_name, string child_text)
-  {
-    HtmlElement e{ child_name, child_text };
-    root.elements.emplace_back(e);
-    return this;
-  }
-
   string str() { return root.str(); }
 
-  operator HtmlElement() const { return root; }
+  // final version
+  operator HtmlElement() const { 
+	  return root;	// again, std::move possible here 
+  }
   HtmlElement root;
 };
 
 int main()
 {
-  // Use Fluent Builder
-  cout << "1th example: fluent Builder, by refenence" << endl;
-  HtmlBuilder builder{ "ul" };
-  // Use chained call by returning reference
-  builder.add_child("li", "hello").add_child("li", "world");
-  cout << builder.str() << endl;
-  cout << endl;
+  // Use factory Method
+  auto builder = HtmlElement::build("ul"); 	// return unique_ptr
+  (*builder).add_child("li", "hello").add_child("li", "world");
+  cout << builder->str();
 
-  // Use Fluent Builder
-  cout << "2nd example: fluent Builder, by pointer" << endl;
-  HtmlBuilder builder2{ "ul" };
-  // Use chained call by returning pointer
-  builder2.add_child_2("li", "hello")->add_child_2("li", "world");
-  cout << builder2.str() << endl;
-  cout << endl;
-  
+  // Use operator()
+  HtmlElement e = HtmlElement::build("ul")
+    ->add_child("li", "hello")	// since e is a pointer
+	.add_child("li", "world");
+  cout << e.str() << endl;
+
   return 0;
 }

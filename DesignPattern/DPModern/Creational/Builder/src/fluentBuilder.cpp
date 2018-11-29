@@ -5,8 +5,6 @@
 #include <memory>
 using namespace std;
 
-struct HtmlBuilder;
-
 struct HtmlElement
 {
   string name;
@@ -16,10 +14,7 @@ struct HtmlElement
 
   HtmlElement() {}
   HtmlElement(const string& name, const string& text)
-    : name(name),
-    text(text)
-  {
-  }
+    : name(name), text(text) { }
 
   string str(int indent = 0) const
   {
@@ -50,6 +45,22 @@ struct HtmlBuilder
     HtmlElement e{ child_name, child_text };
     root.elements.emplace_back(e);
   }
+  
+  // fluent builder: return the Builder reference
+  HtmlBuilder& add_child_ref(string child_name, string child_text)
+  {
+    HtmlElement e{ child_name, child_text };
+    root.elements.emplace_back(e);
+	return *this;
+  }
+  
+  // fluent builder: return the pointer, reference version is better
+  HtmlBuilder* add_child_ptr(string child_name, string child_text)
+  {
+    HtmlElement e{ child_name, child_text };
+    root.elements.emplace_back(e);
+	return this;
+  }
 
   string str() { return root.str(); }
 
@@ -59,19 +70,10 @@ struct HtmlBuilder
 
 int main()
 {
-  // <p>hello</p>
-  cout << "1st example: manually done" << endl;
-  auto text = "hello";
-  string output;
-  output += "<p>";
-  output += text;
-  output += "</p>";
-  printf("<p>%s</p>", text);
-  cout << endl;
-
-  // <ul><li>hello</li><li>world</li></ul>
-  cout << "2nd example: done with for-loop" << endl;
   string words[] = { "hello", "world" };
+  // <ul><li>hello</li><li>world</li></ul>
+ 
+  cout << "Scenario: done with for-loop" << endl;
   ostringstream oss;
   oss << "<ul>";
   for (auto w : words)
@@ -81,19 +83,30 @@ int main()
   cout << endl;
 
   // Use HtmlElement
-  cout << "3rd example: down with HtmlElement" << endl;
+  cout << "Scenario: down with HtmlElement" << endl;
   HtmlElement ul{"ul", ""};
   for (auto w : words)
 	  ul.elements.push_back(HtmlElement{ "li", w });
   cout << ul.str() << endl;
 
   // Use Simple Builder
-  cout << "4th example: Simple Builder" << endl;
+  cout << "Simple Builder" << endl;
   HtmlBuilder builder{ "ul" };
   builder.add_child("li", "hello");
   builder.add_child("li", "world");
   cout << builder.str() << endl;
-  cout << endl;
+  
+  // Use Fluent Builder
+  cout << "Fluent Builder by reference" << endl;
+  HtmlBuilder builder2{ "ul" };
+  builder2.add_child_ref("li", "hello").add_child_ref("li", "world");
+  cout << builder2.str() << endl;
+  
+  // Use Fluent Builder
+  cout << "Fluent Builder by pointer" << endl;
+  HtmlBuilder builder3{ "ul" };
+  builder3.add_child_ptr("li", "hello")->add_child_ptr("li", "world");
+  cout << builder3.str() << endl;
   
   return 0;
 }

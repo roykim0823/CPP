@@ -22,7 +22,7 @@ class Point
   };
 public:
   float x, y;
-  static PointFactory Factory;
+  static PointFactory Factory;  // simplify calling name
 
   friend std::ostream& operator<<(std::ostream& os, const Point& obj)
   {
