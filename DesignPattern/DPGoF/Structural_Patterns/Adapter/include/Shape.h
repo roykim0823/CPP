@@ -10,7 +10,7 @@ public:
     virtual void BoundingBox(
         Point& bottomLeft, Point& topRight
     ) const;
-    virtual Manipulator* CreateManipulator() const;
+    virtual Manipulator* CreateManipulator() const;	// factory method
 };
 
 #endif /* SHAPE_H */
