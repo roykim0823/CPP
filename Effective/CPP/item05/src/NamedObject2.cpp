@@ -7,7 +7,9 @@ public:
   // this ctor no longer takes a const name, because name-
   // Value is now a reference-to-non-const string. The char*
   // ctor is gone, because we must have a string to refer to
-  NamedObject(string& name, const T& value);
+  NamedObject(string& name, const T& value)
+  : nameValue(name), objectValue(value)
+  {}
  
                                // as above, assume no
                                // operator= is declared
@@ -31,6 +33,7 @@ int main()
                                       // would be 29 if she were
                                       // still alive
    
-  p = s;                              // what should happen to
+  // Compilation Error
+  //p = s;                              // what should happen to
                                       // the data members in p?
 }

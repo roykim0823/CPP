@@ -1,6 +1,6 @@
-With C++11, item 21 will be deprecated!
+With C++11, item 03 will be deprecated!
 
-Apparently, the technique from item 21 (returning by const value) also disables
+Apparently, the technique from item 03 (returning by const value) also disables
 move semantics for the returned rvalue...
 
 See also
