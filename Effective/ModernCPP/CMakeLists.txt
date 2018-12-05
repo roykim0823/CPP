@@ -1,12 +1,11 @@
 cmake_minimum_required(VERSION 2.8)
-
 project(Effective_Modern_C++ C CXX)
-
 set(CMAKE_CXX_FLAGS "-std=c++11")
-
 find_package(Threads REQUIRED)
 
-add_subdirectory(Item01_Understand_template_type_deduction)
+add_subdirectory(item01)
+add_subdirectory(item02)
+
 #add_subdirectory(Item02_Understand_auto_type_deduction)
 #add_subdirectory(Item03_Understand_decltype)
 #add_subdirectory(Item04_Know_how_to_view_deduced_types)
