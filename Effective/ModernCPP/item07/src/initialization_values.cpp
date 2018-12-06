@@ -31,7 +31,6 @@ private:
 
 int main()
 {
-
   {
     int x(0);     // initializer is in parentheses
     int y = 0;    // initializer follows "="

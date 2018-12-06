@@ -37,8 +37,10 @@ int main()
   std::mutex f1m, f2m, f3m;   // mutexes for f1, f2, and f3
   
   //auto result1 = lockAndCall(f1, f1m, 0);        // error!
+  auto result1 = lockAndCall(f1, f1m, nullptr);        
 
   //auto result2 = lockAndCall(f2, f2m, NULL);     // error!
+  auto result2 = lockAndCall(f2, f2m, nullptr);    
 
   auto result3 = lockAndCall(f3, f3m, nullptr);  // fine
 

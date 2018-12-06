@@ -5,6 +5,9 @@
  *   involved.
  */
 
+#include <iostream>
+using namespace std;
+
 int* findRecord() {
   return nullptr;
 }
@@ -16,6 +19,7 @@ int main()
     auto result = findRecord( /* arguments */ );
     
     if (result == 0) {
+		cout << "result == 0" << endl;
     }
   }
 
@@ -24,6 +28,7 @@ int main()
     auto result = findRecord( /* arguments */ );
 
     if (result == nullptr) {
+		cout << "result == nullptr" << endl;
     }
   }
 
