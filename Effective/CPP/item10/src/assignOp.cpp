@@ -8,8 +8,10 @@ public:
 
   // This compiles.
   String& operator=(const String& rhs) { return *this; }
+  
   // This won't compile.
   //String& operator=(const String& rhs) { return rhs; }
+  
   // This compiles, but doesn't let client code compile.
   //String& operator=(String& rhs) { return rhs; }
 
