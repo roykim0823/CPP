@@ -3,15 +3,15 @@ using namespace std;
 
 int main()
 {
-  int i1, i2, i3;
-  
-  i1 = 1;
-  i2 = 2;
-  i3 = 3;
+  int x, y, z;
 
-  (i1 = i2) = i3;  // legal!  assigns i2 to i1, then i3 to i1!
+  x=1; y=2; z=3;
 
-  cout << "i1 = " << i1 << endl;
-  cout << "i2 = " << i2 << endl;
-  cout << "i3 = " << i3 << endl;
+  // assignment returns a reference to its left-hand argument
+  x = y = z = 14;
+  cout << x << " " << y << " " << z << endl;
+  // assignment is right-associative, the above assignment chain is parsed like:
+  x = (y = ( z = 15));  // legal!  assigns i2 to i1, then i3 to i1!
+  cout << x << " " << y << " " << z << endl;
+
 }
