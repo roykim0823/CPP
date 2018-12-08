@@ -1,6 +1,4 @@
 /*
- * Key Idea:
- *
  *   Scoped enums are strongly typed, and no implicit
  *   conversions are done. 
  */
@@ -27,4 +25,15 @@ int main()
 //      primeFactors(c);    // function expecting std::size_t
 //    // ...
 //  }
+
+/*
+ *   For scoped enums, no implicit conversion is done. However
+ *   type casting is still valid.
+ */
+  if (static_cast<double>(c) < 14.5) {         // odd code, but it's valid
+    auto factors =                                  // suspect, but
+      primeFactors(static_cast<std::size_t>(c));    // it compiles
+    // ...
+  }
+
 }

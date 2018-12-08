@@ -1,0 +1,13 @@
+set(CMAKE_CXX_FLAGS "-std=c++1z -g -Wall")
+
+#set_source_files_properties(src/overriding_explained.cpp PROPERTIES COMPILE_FLAGS -std=c++14)
+
+add_executable(overriding_explained src/overriding_explained.cpp)
+add_executable(reference_qualifiers_example src/reference_qualifiers_example.cpp)
+add_library(typical_errors src/typical_errors.cpp)
+#add_library(typical_errors_with_override_added src/typical_errors_with_override_added.cpp)
+add_library(typical_errors_corrected src/typical_errors_corrected.cpp)
+add_library(override_legacy_code src/override_legacy_code.cpp)
+add_library(override_games src/override_games.cpp)
+add_executable(reference-qualified_member_functions_use_case_problem_demonstration src/reference-qualified_member_functions_use_case_problem_demonstration.cpp)
+add_executable(reference-qualified_member_functions_use_case_problem_solution src/reference-qualified_member_functions_use_case_problem_solution.cpp)

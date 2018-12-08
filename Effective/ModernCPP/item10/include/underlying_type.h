@@ -1,6 +1,18 @@
 /*
- * Key Idea:
- *
+ *   Every enum has an underlying type determined
+ *   by the compiler - it may choose char, int, or
+ *   any integral type.
+ */
+
+enum Color { black, white, red };
+
+enum Status { good = 0,
+              failed = 1,
+              incomplete = 100,
+              corrupt = 200,
+              indeterminate = 0xFFFFFFFF
+            };
+/*
  *   In C++11, all scoped enums have a default underlying type:
  *   int. It may also be specified explicity, can be forward
  *   declared, and the type specification can be placed in the
