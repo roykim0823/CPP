@@ -1,13 +1,14 @@
 #include <new>
+#include <stdlib.h>
 
-class Example {
+class Base {
 public:
 	static void* operator new(std::size_t size) throw(std::bad_alloc) {
 
 		if (size == 0) {  // 0 byte request.
 			size = 1;
 		}
-		else if (size != sizeof(Example)) {  // new request of Derived Object.
+		else if (size != sizeof(Base)) {  // new request of Derived Object.
 			return ::operator new(size);
 		}
 
@@ -38,6 +39,6 @@ public:
 };
 
 int main() {
-	auto ptr = new Example();
+	auto ptr = new Base();
 	delete ptr;
 }
