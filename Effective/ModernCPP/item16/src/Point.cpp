@@ -23,3 +23,6 @@ private:
   mutable std::atomic<unsigned> callCount{ 0 };
   double x, y;
 };
+
+int main()
+{}

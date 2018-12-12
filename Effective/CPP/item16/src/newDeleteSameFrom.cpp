@@ -11,7 +11,8 @@ int main()
     // Undefined behavior: 99 of the 100 string objects pointed to by
     // stringArray are unlikely to be properly destroyed, because their
     // destructors will probably never be called.
-    delete stringArray;
+    //delete stringArray; 	// Segmentation Fault
+    delete [] stringArray; 	// Segmentation Fault
 
 
     //////////////////////////////// EXAMPLE 2 ////////////////////////////////

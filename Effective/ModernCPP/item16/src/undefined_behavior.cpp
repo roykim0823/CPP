@@ -10,7 +10,9 @@
 
 #include <thread>
 
+//#include "Polynomial1.h"
 #include "Polynomial2.h"
+//#include "Polynomial_with_mutex.h"
 
 Polynomial p;
 
