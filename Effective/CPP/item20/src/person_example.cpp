@@ -5,8 +5,7 @@ using namespace std;
 class Person {
 public:
   Person() { cout << "Person()" << endl; }
-
-  ~Person() { cout << "~Person()" << endl; }
+  virtual ~Person() { cout << "~Person()" << endl; }
  
 private:
   string name, address;
@@ -16,7 +15,7 @@ private:
 class Student: public Person {
 public:
   Student() { cout << "Student()" << endl; }
-  ~Student() { cout << "~Student()" << endl; }
+  virtual ~Student() { cout << "~Student()" << endl; }
  
 private:
   string schoolName, schoolAddress;
@@ -26,18 +25,18 @@ private:
 // Expensive version with pass by value.
 //Student returnStudent(Student s) { return s; }
 
-// Cheap version with pass by reference.
+// Cheap version with pass by reference-to-const
 const Student& returnStudent(const Student& s) { return s; }
 
 int main()
 {
-  cout << "Hello 1" << endl;
+  cout << "Student plato" << endl;
 
   Student plato;                      // Plato studied under Socrates
 
-  cout << "Hello 2" << endl;
+  cout << "calling returnStuent(plato)" << endl;
    
   returnStudent(plato);               // call returnStudent
 
-  cout << "Hello 3" << endl;
+  cout << "After calling..." << endl;
 }
