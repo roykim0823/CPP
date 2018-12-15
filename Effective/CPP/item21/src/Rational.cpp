@@ -2,8 +2,9 @@ class Rational {          // class for rational numbers
 
 public:
 
-  Rational(int numerator = 0, int denominator = 1);
-  ~Rational();
+  Rational(int numerator = 0, int denominator = 1)
+  : n(numerator), d(denominator) {}
+  ~Rational() {}
 
 private:
   int n, d;               // numerator and denominator
