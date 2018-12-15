@@ -1,0 +1,6 @@
+// volatile variable tells the compiler that the value of the variable may change
+// at any time - without any action being taken by the code the compiler finds nearby.
+// -> No optimization : moving load or using register
+// 1. memory-mapped peripheral registers
+// 2. global variables modified by an interrupt service routine
+// 3. global variables accessed by multiple taks within a multi-threaded application
