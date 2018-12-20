@@ -14,6 +14,7 @@ int Rational::denominator() const
   return m_denominator;
 }
 
+// Support mixed-mode arithmetic -> a non-member function
 const Rational operator*(const Rational& lhs,
                          const Rational& rhs)
 {

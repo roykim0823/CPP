@@ -78,7 +78,8 @@ int main()
 
   Person p;
   p.greet();
+  cout << endl;
 
-  getchar();
+  bridge();
   return 0;
 }

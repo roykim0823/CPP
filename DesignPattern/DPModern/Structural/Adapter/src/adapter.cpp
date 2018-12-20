@@ -41,7 +41,7 @@ public:
 
   size_t get_length() const { return s.length(); }
 
-  __declspec(property(get = get_length)) size_t length;
+  //__declspec(property(get = get_length)) size_t length;
 };
 
 int main()
@@ -63,7 +63,7 @@ int main()
     // portable
     cout << p.get_length() << endl;
     // not portable
-    cout << p.length << endl;
+    //cout << p.length << endl;
   }
   
   getchar();
