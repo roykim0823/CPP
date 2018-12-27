@@ -62,6 +62,6 @@ int main()
   auto spw2 = wpw.lock();                     // same as above,
                                               // but uses auto
 
-  std::shared_ptr<Widget> spw3(wpw);  // if wpw's expired,
+  //std::shared_ptr<Widget> spw3(wpw);  // if wpw's expired,(it is expired by "spw=nullptr")
                                       // throw std::bad_weak_ptr
 }

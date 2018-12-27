@@ -82,7 +82,7 @@ int main()
                // final std::weak_ptr to object destroyed here;
                // memory for control block and object is released
 
-  std::shared_ptr<ReallyBigType> pBigObj(new ReallyBigType);
+  std::shared_ptr<ReallyBigType> pBigObj2(new ReallyBigType);
                                        // create very large
                                        // object via new
 
@@ -110,9 +110,9 @@ int main()
 
   // Exception-safe calls
 
-  std::shared_ptr<Widget> spw(new Widget, cusDel);
+  std::shared_ptr<Widget> spw2(new Widget, cusDel);
 
-  processWidget(spw, computePriority());      // correct, but not
+  processWidget(spw2, computePriority());      // correct, but not
                                               // optimal; see below
 
   processWidget(std::move(spw),               // both efficient and
