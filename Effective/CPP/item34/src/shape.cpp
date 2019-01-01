@@ -5,13 +5,14 @@ using namespace std;
 class Shape {
 
 public:
-
-  virtual void draw() const = 0;
-
+  // pure virtual func: inherit a function iterface "only" 
+  virtual void draw() const = 0; 		
+  
+  // simple virtual func: inherit a function iterface and a default implementation 
   virtual void error(const string& msg);
 
+  // non-virtual function: inherit a function iterfact and a "mandatory" implementation
   int objectID() const;
-
 };
 
 void Shape::draw() const
@@ -29,12 +30,10 @@ int Shape::objectID() const
   return 1;
 }
 
-
 class Rectangle: public Shape {
 public:
   void draw() const { cout << "Rectangle::draw()" << endl; }
 };
-
 
 class Ellipse: public Shape {
 public:
@@ -44,7 +43,7 @@ public:
 
 int main()
 {
-  //Shape *ps = new Shape;           // error! Shape is abstract
+  //Shape *ps = new Shape;         // error! Shape is abstract
   
   Shape *ps1 = new Rectangle;      // fine
   ps1->draw();                     // calls Rectangle::draw
@@ -53,6 +52,5 @@ int main()
   ps2->draw();                     // calls Ellipse::draw
   
   ps1->Shape::draw();              // calls Shape::draw
-  
   ps2->Shape::draw();              // calls Shape::draw
 }

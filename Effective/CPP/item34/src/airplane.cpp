@@ -19,7 +19,7 @@ class ModelA: public Airplane { };
 
 class ModelB: public Airplane { };
 
-class ModelC: public Airplane {
+class ModelC: public Airplane {	// ModelC does not use "fly"
                                // no fly function is
                                // declared
 };
