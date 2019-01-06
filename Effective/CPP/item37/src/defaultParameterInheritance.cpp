@@ -1,3 +1,7 @@
+#include <iostream>
+
+using namespace std;
+
 enum ShapeColor { RED, GREEN, BLUE };
 
  // a class for geometric shapes
@@ -11,13 +15,15 @@ public:
 class Rectangle: public Shape {
 public:
   // notice the different default parameter value - bad!
-  virtual void draw(ShapeColor color = GREEN) const;
+  virtual void draw(ShapeColor color = GREEN) const
+  {	cout << "Rectangle:draw() = " << color << endl; }
 };
 
 
 class Circle: public Shape {
 public:
-  virtual void draw(ShapeColor color) const;
+  virtual void draw(ShapeColor color) const
+  {	cout << "Rectangle:draw() = " << color << endl; }
 };
 
 
