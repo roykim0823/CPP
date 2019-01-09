@@ -23,7 +23,7 @@ class Base2 {};
 
 int main() {
 	SmartPointer<Base> a(new Derived);  // compile ok.
-	SmartPointer<Base2> b(new Base);  // compile error.
+	//SmartPointer<Base2> b(new Base);  // compile error.
 	SmartPointer<Derived> c(new Derived);  // compile ok.
 	SmartPointer<Base> d = c;  // compile ok.
 }
