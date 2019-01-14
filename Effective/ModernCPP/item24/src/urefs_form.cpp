@@ -16,7 +16,7 @@ template<typename T>
 void f(std::vector<T>&& param);  // param is an rvalue reference
 
 template<typename T>
-void f(const T&& param);         // param is an rvalue reference
+void f(const T&& param);         // param is an rvalue reference due to const
 
 template<typename MyTemplateType>       // param is a
 void someFunc(MyTemplateType&& param);  // universal reference
