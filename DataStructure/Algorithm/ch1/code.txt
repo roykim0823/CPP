@@ -1,0 +1,63 @@
+
+        This file contains the code from "Algorithms in C++, Third Edition,
+        Parts 1-4," by Robert Sedgewick, and is covered under the copyright
+        and warranty notices in that book. Permission is granted for this
+        code to be used for educational purposes in association with the text,
+        and for other uses not covered by copyright laws, provided that
+        the following notice is included with the code:
+
+                "This code is from "Algorithms in C++, Third Edition,"
+                by Robert Sedgewick, Addison-Wesley, 1999."
+
+        Commercial uses of this code require the explicit written
+        permission of the publisher. Send your request for permission,
+        stating clearly what code you would like to use, and in what
+        specific way, to: aw.cse@aw.com
+
+
+----------
+CHAPTER 1. Introduction
+-----
+#include <iostream.h>
+static const int N = 10000;
+int main()
+  { int i, p, q, id[N];
+    for (i = 0; i < N; i++) id[i] = i;
+    while (cin >> p >> q)
+      { int t = id[p];
+        if (t == id[q]) continue;
+        for (i = 0; i < N; i++)
+          if (id[i] == t) id[i] = id[q];
+        cout << " " << p << " " << q << endl;
+      }
+ }
+-----
+    for (i = p; i != id[i]; i = id[i]) ;
+    for (j = q; j != id[j]; j = id[j]) ;
+    if (i == j) continue;
+    id[i] = j;
+    cout << " " << p << " " << q << endl;
+    -----
+#include <iostream.h>
+static const int N = 10000;
+int main()
+  { int i, j, p, q, id[N], sz[N];
+    for (i = 0; i < N; i++) 
+      { id[i] = i; sz[i] = 1; }
+    while (cin >> p >> q)
+      { 
+        for (i = p; i != id[i]; i = id[i]) ;
+        for (j = q; j != id[j]; j = id[j]) ;
+        if (i == j) continue;
+        if (sz[i] < sz[j])
+             { id[i] = j; sz[j] += sz[i]; }
+        else { id[j] = i; sz[i] += sz[j]; }
+        cout << " " << p << " " << q << endl;
+      }
+ }
+-----
+    for (i = p; i != id[i]; i = id[i]) 
+      id[i] = id[id[i]]; 
+    for (j = q; j != id[j]; j = id[j]) 
+      id[j] = id[id[j]]; 
+    

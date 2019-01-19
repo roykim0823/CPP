@@ -4,39 +4,43 @@
 #include <iostream>
 #include <vector>
 
-class QuickFindUF
-{
-	std::vector<int> id;	// access to component id 
-	int count;				// number of components
-
+class unionFind {
+	std::vector<int> id;	// access to component id
+	int count;             	// number of components
+protected:
+	virtual int find(int p) {
+		return id[i];
+	}
 public:
-	QuickFindUF(int N)
-	{
-		// Initialize component id array
-		count = N;
-		id.resize(N);
-		for(int i=0; i<N; i++)
+	unionFind(int n): count(n) {
+		id.resize(n);
+		for(int i=0; i<n; i++)
 			id[i]=i;
 	}
 
-	int get_count() { return count; }
-	bool connected(int p, int q) 
-	{ 
-		return find(p) == find(q);
-	}
+	int get_count() 				{ return count; }
+	bool connected(int p, int q)	{ return find(p) == find(q); }
+	virtual void make_union (int p, int q) = 0;
+};
 
-	int find(int p) { return id[p]; }
+// Complexity
+// init: O(n), union: O(n), find: O(1)
+// union: O(n^2) to process a sequence of N union commands on N objects
+class QuickFindUF : public unionFind // eager approach
+{
+public:
+	QuickFindUF(int n): unionFind(n) {}
 
-	void connect(int p, int q)
+	// Put p and q into the same component
+	void connect(int p, int q) override final
 	{
-		// Put p and q into the same component
      	int pID = find(p);
 		int qID = find(q);
 
 		// Nothing to do if p and q are already in the same component
 		if(pID == qID) return;
 
-		// Rename p's component to q's name
+		// change all entires with id[i] to id[q];
 		std::vector<int>::iterator pos;
 		for(pos=id.begin(); pos!=id.end(); ++pos)
 			if(*pos==pID) *pos=qID;
@@ -46,40 +50,29 @@ public:
 };
 
 
-class QuickUnionUF
+class QuickUnionUF : public unionFind	// lazy approach
 {
-	std::vector<int> id;	// access to component id 
-	int count;				// number of components
-
-public:
-	QuickUnionUF(int N)
-	{
-		// Initialize component id array
-		count = N;
-		id.resize(N);
-		for(int i=0; i<N; i++)
-			id[i]=i;
-	}
-
-	int get_count() { return count; }
-	
-	bool connected(int p, int q) 
-	{ 
-		return find(p) == find(q);
-	}
-
-	int find(int p)	// Find the root
-	{ 
-		// Find component name
-		while (p !=id[p]) p=id[p];
+protected:
+	int find(int p) override final { 
 		return id[p]; 
 	}
+public:
+	QuickUnionUF(int n): unionFind(n) {}
+
+	// chase parent poiners until reach root
+	int root(int p)	override final {
+		// depth of i array accesses
+		while (p !=id[p]) p=id[p];
+		return p; 
+	}
+
+
 
 	void connect(int p, int q)
 	{
 		// Put p and q into the same component
-     	int pRoot = find(p);
-		int qRoot = find(q);
+     	int pRoot = root(p);
+		int qRoot = root(q);
 
 		if(pRoot == qRoot) return;
 
