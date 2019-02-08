@@ -10,4 +10,5 @@ if (Boost_FOUND)
 endif ()
 
 include_directories(include)
+#add_executable(bridge src/bridge.cpp src/Person.cpp src/Renderer.cpp)
 add_executable(bridge src/bridge.cpp src/Person.cpp)
