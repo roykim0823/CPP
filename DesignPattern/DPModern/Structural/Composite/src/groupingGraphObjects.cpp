@@ -1,7 +1,6 @@
-﻿#pragma once
-#include <iostream>
+﻿#include <iostream>
 #include <vector>
-#include <memory>
+//#include <memory>
 
 struct GraphicObject
 {
@@ -20,11 +19,8 @@ struct Group : GraphicObject
 {
   std::string name;
 
-
   explicit Group(const std::string& name)
-    : name{name}
-  {
-  }
+    : name{name} {}
 
   void draw() override
   {
@@ -36,7 +32,7 @@ struct Group : GraphicObject
   std::vector<GraphicObject*> objects;
 };
 
-inline void graphics()
+int main()
 {
   Group root("root");
   Circle c1, c2;

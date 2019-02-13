@@ -1,10 +1,6 @@
-#include <cstdio>
-#include <vector>
 #include <iostream>
-#include <boost/predef/library/c.h>
-#include <boost/predef/library/c.h>
-#include <boost/predef/library/c.h>
-#include <boost/predef/library/c.h>
+#include <vector>
+#include <cstdio>
 using namespace std;
 
 struct Neuron;
@@ -36,23 +32,8 @@ struct Neuron : SomeNeurons<Neuron>
     this->id = id++;
   }
 
-  /*template <typename T> void connect_to(T& other)
-  {
-    for (Neuron& target : other)
-      connect_to(target);
-  }*/
-
-  // legal in MSVC only
-  /*template<> void connect_to<Neuron>(Neuron& other)
-  {
-    out.push_back(&other);
-    other.in.push_back(this);
-  }*/
-
-  // connect_to(vector<Neuron>&)
-
-  Neuron* begin() { return this; }
-  Neuron* end() { return this + 1; }
+  Neuron* begin() 	{ return this; }
+  Neuron* end() 	{ return this + 1; }
 
   friend ostream& operator<<(ostream& os, const Neuron& obj)
   {
@@ -85,22 +66,19 @@ struct NeuronLayer : vector<Neuron>, SomeNeurons<NeuronLayer>
   }
 };
 
-void main()
+int main()
 {
   Neuron n1, n2;
+  NeuronLayer layer1{3}, layer2{5};
+
   n1.connect_to(n2);
-
   cout << n1 << n2 << endl;
+  n1.connect_to(layer1);
+  cout << n1 << layer1 << endl;
+  layer1.connect_to(n1);
+  cout << layer1 << n1 << endl;
+  layer1.connect_to(layer2);
+  cout << layer1 << layer2 << endl;
 
-  NeuronLayer l1{5};
-  Neuron n3;
-  l1.connect_to(n3);
-  
-  cout << "Neuron " << n3.id << endl << n3 << endl;
-  cout << "Layer " << endl << l1 << endl;
-
-  NeuronLayer l2{ 2 }, l3{ 3 };
-  l2.connect_to(l3);
-  cout << "Layer l2" << endl << l2;
-  cout << "Layer l3" << endl << l3;
+  return 0;
 }
