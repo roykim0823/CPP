@@ -2,6 +2,7 @@
 #include <string>
 #include <ostream>
 #include <vector>
+#include <cstring>	// for memset
 using namespace std;
 
 class FormattedText
