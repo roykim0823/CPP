@@ -16,7 +16,7 @@ using namespace flyweights;
 //typedef uint32_t key;
 typedef unsigned key;
 
-// mmorpg
+// Assume User stores millions of user names for MMORPG game
 struct User
 {
   User(const string& first_name, const string& last_name)
@@ -44,16 +44,17 @@ struct User
   }
 
   static key seed;
+
 protected:
   key first_name, last_name;
-  static bimap<key, string> names;
+  static bimap<key, string> names; 	// boost::bimap (a bidirectional map)
 
   static key add(const string& s)
   {
     auto it = names.right.find(s);
     if (it == names.right.end())
     {
-      // add it
+	  // add it
       key id = ++seed;
       names.insert({seed, s});
       return id;

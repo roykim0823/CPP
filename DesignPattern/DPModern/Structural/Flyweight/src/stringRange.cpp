@@ -5,6 +5,7 @@
 #include <cstring>	// for memset
 using namespace std;
 
+// Naive approach using bitmap
 class FormattedText
 {
   string plain_text;
@@ -38,6 +39,7 @@ public:
   }
 };
 
+// use range
 class BetterFormattedText
 {
 public:

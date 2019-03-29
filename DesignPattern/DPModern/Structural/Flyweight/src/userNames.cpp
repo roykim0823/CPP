@@ -1,6 +1,7 @@
 ﻿#include "user.h"
+
 // initialize the static member
-//key User::seed = 0;
+key User::seed = 0;
 bimap<key, string> User::names{};
 
 void naive_flyweight()
@@ -13,7 +14,7 @@ void naive_flyweight()
 
   User::info();
 }
-/*
+
 struct User2	// use boost::flyweight
 {
   flyweight<string> first_name, last_name;
@@ -35,11 +36,11 @@ void boost_flyweight()
   cout << boolalpha
        << (&user1.last_name.get() == &user2.last_name.get()) << endl;
 }
-*/
-int main_()
+
+int main()
 {
   naive_flyweight();
-  //boost_flyweight();
+  boost_flyweight();
 
   getchar();
   return 0;
