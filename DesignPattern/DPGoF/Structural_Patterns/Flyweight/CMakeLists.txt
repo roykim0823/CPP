@@ -1,13 +1,10 @@
-#include_directories(../../Foundation_Classes)
-#include_directories(../../Behavioral_Patterns/Iterator)
+cmake_minimum_required(VERSION 2.8)
+project(Bridge)
+#set(CMAKE_CXX_FLAGS "-std=c++1z -g -Wall")
+set(CMAKE_CXX_FLAGS "-g -Wall")
 
-set(flyweight_SRCS
-    Character.cpp
-    Font.cpp
-    Glyph.cpp
-    GlyphContext.cpp
-    GlyphFactory.cpp)
+include_directories(../../Foundation_Classes)
+include_directories(include)
+file(GLOB SRCS "src/*.cpp")
 
-add_executable(flyweight1 flyweight1.cpp)
-add_library(flyweight SHARED ${flyweight_SRCS})
-target_link_libraries(flyweight1 flyweight)
+add_library(bridge SHARED ${SRCS})

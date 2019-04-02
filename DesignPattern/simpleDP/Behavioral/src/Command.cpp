@@ -88,8 +88,8 @@ private:
 
 int main()
 {
-  Receiver receiver = Receiver();
-  ConcreteCommand command = ConcreteCommand(&receiver);
+  Receiver * receiver = new Receiver();
+  ConcreteCommand command = ConcreteCommand(receiver);
 
   Invoker invoker = Invoker();
   invoker.set(&command);

@@ -32,10 +32,10 @@ const Point& Image::GetExtent()
 
 void Image::Load(istream& from)
 {
-    std::cout << "Loading image from input stream " << from << "." << std::endl;
+   // std::cout << "Loading image from input stream " << from << "." << std::endl;
 }
 
 void Image::Save(ostream& to)
 {
-    std::cout << "Saving image to output stream " << to << "." << std::endl;
+   // std::cout << "Saving image to output stream " << to << "." << std::endl;
 }
