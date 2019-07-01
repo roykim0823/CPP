@@ -1,0 +1,67 @@
+============
+A. The Bugs
+------------
+1. the common bug: predictable bugs
+2. Sporadic Bugs: do the regressions tests
+3. Heisenbugs: the harder you try to debug the better certain bugs are hiding
+  a. The raceist: race conditions (the program behaves depending on the order of execution of certain piece of code)
+    - multithreading
+    - inappropriate inter-task communications
+    - missing means of synchronization
+    * Even single-threaded program can be affected: order-of-initialization
+    -> printf() or debugger can change the the behavior!!
+  b. The memory outlaw -> memory debuggers
+    - uninitialized variables
+    - dangling pointers
+    - array bound violations
+  c. The Idealist: bus in optimization by compiler
+    - turn off complier's optimization
+4. Bugs hiding behind bugs (multiple bugs) -> One change at a time
+
+===================
+B. Memory Problems
+-------------------
+1. Memory Leak: not deallocated memory once they are no longer needed in the program
+  a. frequent leak or large leak causes:
+    - slow down the program as OS starts swapping pages to virtual memory
+    - eventually program fails with an out-of-memory error
+  b. finding leaks with a general debugger is difficult 
+    - since there is no obvious faulty statment
+    - The bug is that a statement is "missing" or "not called"
+2. Incorrect Use of Memory Management
+  a. freeing a block of memory more than once
+  b. accessing memory after freeing it
+  c. freeing a block that was never allocated
+  d. using delete instead of delete[] for C++ array deallocation
+  e. using malloc() with delete / using new with free()
+  f. null pointer read or write
+3. Buffer Overruns (array out-of-bound error)
+  a. overwrite (corrupt) outside of the allocated memory boundaries
+  b. *bug may not become visible at the statement where the memory is overwritten.
+    -> only later, another statement in the program will acess this memory location
+    -> then, program can behave incorrectly in a number of ways:
+    -> compute a wrong result, try to access a protected memory and crash
+    * No strict relation between the statement causing the memory corruption and
+      the statement triggering the visible bug.
+4. Uninitialized Memory Bug
+  a. malloc() and new do not initialize or zero out the alocated memory blocks.
+  b. It's programmer's full responsiblility to initialize all global and local variables
+  c. Uninitialized variables will contain unpredictable values.
+   
+====================
+C. Memory Profiling
+--------------------
+1. Excessive memory consumption can be due to 
+  a. inefficient data structures
+  b. missing memory deallocation
+  c. incorrect estimate 
+2. Excessive memory use can increase the runtime of a program by:
+  a. forcing the program to access main memory instead of the faster cache
+  b. overflowing the availble main memory (paging)
+3. Basic Strategy
+  a. check whether there are no memory leaks as well as no memory corruption
+  b. "back-of-the-envelop": estimate for the memory use of a program
+  c. find out when the memory is consumed and roughly where in the program flow
+  d. identify the statements and data structures that use the memory
+
+
