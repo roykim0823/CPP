@@ -1,0 +1,23 @@
+Installation For Other Platforms
+
+If you work on Linux or Mac, you can use alternative software for implementing the examples.
+
+For Java, you can download Eclipse by choosing the platform as described in the video.
+
+For C#, you can download MonoDevelop for Linux or Mac. Here is the link: 
+
+http://www.monodevelop.com/
+
+For C++, you can use Eclipse IDE for C/C++ developers. You can use the same steps to download as shown in the lecture "Installation of Eclipse for Java". You only need to choose the correct package and the platform.
+
+Or you may also download Cevelop for C++. It is based on Eclipse, but more geared towards C++ developers.
+
+However, you have to download a compiler separately. I recommend using MingW from mingw.org. Download the installer and choose gcc/g++ compiler.
+
+Cevelop is available as a zip file. Download and unzip it in a directory of your choice and run the Cevelop executable. It will pickup mingw installation directory automatically.
+
+Here's the link:
+
+https://www.cevelop.com/download/
+
+Alternatively, you can use XCode on Mac for C++. XCode can be downloaded directly from Mac Appstore.
