@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 2.8)
 project(Creational)
 
 set(CMAKE_CXX_FLAGS "-std=c++1z -g -Wall")
-#set(CMAKE_CXX_FLAGS "-std=c++11 -g -Wall")
 
 include_directories(include)
 file(GLOB SRCS "src/*.cpp")
@@ -13,7 +12,9 @@ foreach(src IN LISTS SRCS)
 	string(REPLACE "." ";" temp ${filename})
 	list(GET temp 0 target)
 	add_executable(${target} ${src})
-	target_link_libraries(${target} rt)
+	if (UNIX AND NOT APPLE)
+		target_link_libraries(${target} rt)
+	endif()
 	list(APPEND TARGET_LIST ${target})
 endforeach()
 
