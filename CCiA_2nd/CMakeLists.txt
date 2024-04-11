@@ -29,4 +29,4 @@ find_package(Boost COMPONENTS system thread REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
 include_directories("${PROJECT_SOURCE_DIR}/src/")
 
-add_subdirectory(src/)
+add_subdirectory(src)

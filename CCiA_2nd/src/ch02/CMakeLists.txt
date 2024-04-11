@@ -21,3 +21,6 @@ target_link_libraries(listing_2.7 pthread)
 
 add_executable(listing_2.8 listing_2.8.cpp)
 target_link_libraries(listing_2.8 pthread)
+
+add_executable(listing_2.9 listing_2.9.cpp)
+target_link_libraries(listing_2.9 pthread)
