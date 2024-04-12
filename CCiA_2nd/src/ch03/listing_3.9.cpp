@@ -10,7 +10,8 @@ class X
 {
 private:
     some_big_object some_detail;
-    mutable std::mutex m;
+    // mutable std::mutex m;
+    std::mutex m;
 public:
     X(some_big_object const& sd):some_detail(sd){}
 

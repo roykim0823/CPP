@@ -33,7 +33,9 @@ public:
     }
     void unlock()
     {
-        this_thread_hierarchy_value=previous_hierarchy_value;
+        if (this_thread_hierarchy_value != hierarchy_value)
+            throw std::logic_error("mutex hierarchy violated");
+        this_thread_hierarchy_value=previous_hierarchy_value;  // restore this_thread_hierarchy_value
         internal_mutex.unlock();
     }
     bool try_lock()

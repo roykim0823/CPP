@@ -21,7 +21,7 @@ public:
     void update_or_add_entry(std::string const& domain,
                              dns_entry const& dns_details)
     {
-        std::lock_guard<std::shared_mutex> lk(entry_mutex);
+        std::lock_guard<std::shared_mutex> lk(entry_mutex);  // exclusive access and block the find_entry()
         entries[domain]=dns_details;
     }
 };

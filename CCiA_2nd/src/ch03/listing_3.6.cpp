@@ -23,6 +23,14 @@ public:
         std::lock_guard<std::mutex> lock_b(rhs.m,std::adopt_lock);
         swap(lhs.some_detail,rhs.some_detail);
     }
+
+    friend void swap_17(X& lhs, X& rhs)
+    {
+        if(&lhs==&rhs)
+            return;
+        std::scoped_lock guard(lhs.m, rhs.m);  // C++17 
+        swap(lhs.some_detail,rhs.some_detail);
+    }
 };
 
 int main()
