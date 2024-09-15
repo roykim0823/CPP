@@ -4,9 +4,9 @@
 #include <iostream>
 using namespace std;
 
-struct SubtractionExpression;
 struct DoubleExpression;
 struct AdditionExpression;
+struct SubtractionExpression;
 
 struct ExpressionVisitor
 {
@@ -32,9 +32,11 @@ struct ExpressionEvaluator : ExpressionVisitor
   void visit(SubtractionExpression* se) override;
 };
 
+//-----------------------------------------------------------------------------
+
 struct Expression
 {
-  virtual void accept(ExpressionVisitor* visitor) = 0;
+  virtual void accept(ExpressionVisitor* visitor) = 0;  // double dispatch
 };
 
 struct DoubleExpression : Expression
@@ -87,6 +89,9 @@ struct SubtractionExpression : Expression
   }
 };
 
+
+// Implement visit()
+
 void ExpressionPrinter::visit(DoubleExpression* de)
 {
   oss << de->value;
@@ -96,7 +101,7 @@ void ExpressionPrinter::visit(AdditionExpression* e)
 {
   bool need_braces = dynamic_cast<SubtractionExpression*>(e->right);
   e->left->accept(this);
-  oss << "-";
+  oss << "+";
   if (need_braces) oss << "(";
   e->right->accept(this);
   if (need_braces) oss << ")";
@@ -133,7 +138,7 @@ void ExpressionEvaluator::visit(SubtractionExpression* se)
   result = temp - result;
 }
 
-void main()
+int main()
 {
   auto e = new AdditionExpression{
     new DoubleExpression{ 1 },
@@ -148,5 +153,7 @@ void main()
   printer.visit(e);
   evaluator.visit(e);
   cout << printer.str() << " = " << evaluator.result << endl;
-  getchar();
+
+  delete e;
+  return 0;
 }

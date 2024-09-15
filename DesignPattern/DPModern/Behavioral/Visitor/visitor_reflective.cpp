@@ -39,16 +39,17 @@ struct ExpressionPrinter
   void print(AdditionExpression *ae, ostringstream& oss) const
   {
     oss << "(";
-    print(ae->left, oss);
+    print(ae->left, oss);  // not working, which print()?
     oss << "+";
     print(ae->right, oss);
     oss << ")";
   }*/
+
   ostringstream oss;
 
   void print(Expression *e)
   {
-    if (auto de = dynamic_cast<DoubleExpression*>(e))
+    if (auto de = dynamic_cast<DoubleExpression*>(e))  // downside1: dynamic_cast
     {
       oss << de->value;
     } 
@@ -59,14 +60,13 @@ struct ExpressionPrinter
       oss << "+";
       print(ae->right);
       oss << ")";
-    }
+    }  // downside2: what if we forget one of elements?
   }
 
   string str() const { return oss.str(); }
 };
 
-void main_3_()
-{
+int main() {
   auto e = new AdditionExpression{
     new DoubleExpression{ 1 },
     new AdditionExpression{
@@ -79,4 +79,7 @@ void main_3_()
   ExpressionPrinter ep;
   ep.print(e);
   cout << ep.str() << endl;
+
+  delete e;
+  return 0;
 }

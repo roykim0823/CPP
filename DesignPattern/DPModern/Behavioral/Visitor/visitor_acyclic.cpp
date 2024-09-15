@@ -65,20 +65,15 @@ struct AdditionExpression : Expression
 };
 
 struct ExpressionPrinter : VisitorBase,
-                           Visitor<Expression>,
-                           //Visitor<DoubleExpression>,
+                           //Visitor<Expression>,  // not required
+                           Visitor<DoubleExpression>,  // compile without Visitr<DoubleExpression>
                            Visitor<AdditionExpression>
 {
-  void visit(Expression &obj) override
-  {
-    // fallback?
-  }
-
   // can remove double visitor without failure
-//  void visit(DoubleExpression &obj) override
-//  {
-//    oss << obj.value;
-//  }
+  void visit(DoubleExpression &obj) override
+  {
+    oss << obj.value;
+  }
 
   void visit(AdditionExpression &obj) override
   {
@@ -108,6 +103,6 @@ int main()
   ep.visit(*e);
   cout << ep.str() << "\n";
 
-	//getchar();
+  delete e;
 	return 0;
 }

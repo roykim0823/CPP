@@ -6,7 +6,7 @@ using namespace std;
 
 struct Expression
 {
-  virtual void print(ostringstream& oss) = 0;
+  virtual void print(ostringstream& oss) = 0;  // visitor pattern
 };
 
 struct DoubleExpression : Expression
@@ -15,8 +15,7 @@ struct DoubleExpression : Expression
   explicit DoubleExpression(const double value)
     : value{value} {}
 
-  void print(ostringstream& oss) override
-  {
+  void print(ostringstream& oss) override {
     oss << value;
   }
 };
@@ -28,14 +27,12 @@ struct AdditionExpression : Expression
   AdditionExpression(Expression* const left, Expression* const right)
     : left{left}, right{right} {}
 
-  ~AdditionExpression()
-  {
+  ~AdditionExpression() {
     delete left;
     delete right;
   }
 
-  void print(ostringstream& oss) override
-  {
+  void print(ostringstream& oss) override {
     oss << "(";
     left->print(oss);
     oss << "+";
@@ -44,8 +41,7 @@ struct AdditionExpression : Expression
   }
 };
 
-void main_2_()
-{
+int main() {
   auto e = new AdditionExpression{
     new DoubleExpression{1},
     new AdditionExpression{
@@ -53,7 +49,11 @@ void main_2_()
       new DoubleExpression{3}
     }
   };
+
   ostringstream oss;
   e->print(oss);
   cout << oss.str() << endl;
+
+  delete e;
+  return 0;
 }
