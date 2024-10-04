@@ -1,11 +1,13 @@
 #include <mutex>
 #include <condition_variable>
+#include <iostream>
 #include <thread>
 #include <queue>
 
+bool more_data = true;
 bool more_data_to_prepare()
 {
-    return false;
+    return more_data;
 }
 
 struct data_chunk
@@ -33,9 +35,13 @@ void data_preparation_thread()
     while(more_data_to_prepare())
     {
         data_chunk const data=prepare_data();
-        std::lock_guard<std::mutex> lk(mut);
-        data_queue.push(data);
+        {
+            std::lock_guard<std::mutex> lk(mut);
+            data_queue.push(data);
+        }
         data_cond.notify_one();
+        std::cout << "notify_one()" << std::endl;  // should be used under lock()
+        more_data=false;  // to exit the while loop
     }
 }
 
@@ -58,7 +64,7 @@ int main()
 {
     std::thread t1(data_preparation_thread);
     std::thread t2(data_processing_thread);
-    
+
     t1.join();
     t2.join();
 }

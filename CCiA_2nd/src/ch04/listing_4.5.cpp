@@ -1,7 +1,9 @@
 #include <mutex>
 #include <condition_variable>
+#include <iostream>
 #include <queue>
 #include <memory>
+#include <thread>
 
 template<typename T>
 class threadsafe_queue
@@ -22,6 +24,7 @@ public:
     void push(T new_value)
     {
         std::lock_guard<std::mutex> lk(mut);
+        std::cout << "push(" << new_value << ")" << std::endl;
         data_queue.push(new_value);
         data_cond.notify_one();
     }
@@ -40,13 +43,14 @@ public:
         data_cond.wait(lk,[this]{return !data_queue.empty();});
         std::shared_ptr<T> res(std::make_shared<T>(data_queue.front()));
         data_queue.pop();
+        std::cout << "pop(" << *res << ")" << std::endl;
         return res;
     }
 
     bool try_pop(T& value)
     {
         std::lock_guard<std::mutex> lk(mut);
-        if(data_queue.empty)
+        if(data_queue.empty())
             return false;
         value=data_queue.front();
         data_queue.pop();
@@ -70,5 +74,28 @@ public:
     }
 };
 
-int main()
-{}
+void producer(threadsafe_queue<int>& ts_q) {
+    ts_q.push(1);
+    ts_q.push(2);
+    ts_q.push(3);
+    ts_q.push(4);
+    ts_q.push(5);
+}
+
+void consumer(threadsafe_queue<int>& ts_q) {
+    std::vector<int> answer;
+    answer.push_back(*ts_q.wait_and_pop());
+    answer.push_back(*ts_q.wait_and_pop());
+    answer.push_back(*ts_q.wait_and_pop());
+    answer.push_back(*ts_q.wait_and_pop());
+    answer.push_back(*ts_q.wait_and_pop());
+}
+
+int main() {
+    threadsafe_queue<int> ts_queue;
+    std::thread t1(producer, std::ref(ts_queue));
+    std::thread t2(consumer, std::ref(ts_queue));
+    t1.join();
+    t2.join();
+    return 0;
+}
