@@ -7,13 +7,9 @@ using namespace std;
 
 struct HtmlBuilder;
 
-struct HtmlElement
+class HtmlElement
 {
-  string name;
-  string text;
-  vector<HtmlElement> elements;
-  const size_t indent_size = 2;
-
+  public:
   string str(int indent = 0) const
   {
     ostringstream oss;
@@ -38,6 +34,11 @@ struct HtmlElement
 protected:	
   friend class HtmlBuilder;	// to access constructors in HtmlBuilder
  
+private:
+  string name;
+  string text;
+  vector<HtmlElement> elements;
+  const size_t indent_size = 2;
   // hide all constructors (or private) 
   // so, builder is the only way to construct HtmlElement
   // -> force users to use the builder
@@ -49,8 +50,9 @@ protected:
   }
 };
 
-struct HtmlBuilder
+class HtmlBuilder
 {
+  public:
   HtmlBuilder(string root_name)
   {
     root.name = root_name;
@@ -70,21 +72,24 @@ struct HtmlBuilder
   operator HtmlElement() const { 
 	  return root;	// again, std::move possible here 
   }
+  private:
   HtmlElement root;
 };
 
 int main()
 {
-  // Use factory Method
-  auto builder = HtmlElement::build("ul"); 	// return unique_ptr
-  (*builder).add_child("li", "hello").add_child("li", "world");
-  cout << builder->str();
+    // easier
+  HtmlBuilder builder{ "ul" };
+  builder.add_child("li", "hello").add_child("li", "world");
+  cout << builder.str() << endl;
 
-  // Use operator()
-  HtmlElement e = HtmlElement::build("ul")
-    ->add_child("li", "hello")	// since e is a pointer
-	.add_child("li", "world");
-  cout << e.str() << endl;
 
+  auto builder2 = HtmlElement::build("ul")  // use factor method
+    ->add_child("li", "hello").add_child("li", "world");
+  cout << builder2.str() << endl;
+
+  auto builder3 = HtmlElement::build("ul");  // use factor method
+  (*builder3).add_child("li", "hello").add_child("li", "world");
+  cout << builder2.str() << endl;
   return 0;
 }

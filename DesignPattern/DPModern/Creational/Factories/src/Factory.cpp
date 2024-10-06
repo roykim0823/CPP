@@ -5,10 +5,11 @@ class Point
 {
   // private constructor -> use a factory method
   Point(float x, float y) : x(x), y(y){}
-public:
   float x, y;
+public:
 
-  friend class PointFactory;
+
+  friend class PointFactory;  // Violate OCP
 
   friend std::ostream& operator<<(std::ostream& os, const Point& obj)
   {

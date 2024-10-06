@@ -64,15 +64,14 @@ struct HtmlBuilder
 
   string str() { return root.str(); }
 
-  operator HtmlElement() const { return root; }
   HtmlElement root;
 };
 
-int main()
-{
-  string words[] = { "hello", "world" };
+int main() {
+  // Without Builder
   // <ul><li>hello</li><li>world</li></ul>
- 
+  string words[] = { "hello", "world" };
+  
   cout << "Scenario: done with for-loop" << endl;
   ostringstream oss;
   oss << "<ul>";
