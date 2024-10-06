@@ -22,7 +22,7 @@ class Point
   };
 public:
   float x, y;
-  static PointFactory Factory;  // simplify calling name
+  static PointFactory Factory;  // Singleton pattern: simplify calling name
 
   friend std::ostream& operator<<(std::ostream& os, const Point& obj)
   {

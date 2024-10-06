@@ -1,7 +1,7 @@
 cmake_minimum_required (VERSION 3.20)
 project(CCiA CXX)
 
-set(CMAKE_CXX_FLAGS "-std=c++17 -stdlib=libc++")
+set(CMAKE_CXX_FLAGS "-std=c++17")
 
 set(CXX_FLAGS
  -g
@@ -24,9 +24,9 @@ set(CXX_FLAGS
 set(CMAKE_CXX_FLAGS_DEBUG "-O0")
 set(CMAKE_CXX_FLAGS_RELEASE "-O2 -finline-limit=1000 -DNDEBUG")
 
-find_package(Boost COMPONENTS system thread REQUIRED)
+#find_package(Boost COMPONENTS system thread REQUIRED)
 
-include_directories(${Boost_INCLUDE_DIRS})
+#include_directories(${Boost_INCLUDE_DIRS})
 include_directories("${PROJECT_SOURCE_DIR}/src/")
 
 add_subdirectory(src)

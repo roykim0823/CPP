@@ -3,8 +3,8 @@
 
 struct X
 {
-    void foo(int,std::string const&);
-    std::string bar(std::string const&);
+    void foo(int,std::string const&) {};
+    std::string bar(std::string const& str) {return str;};
 };
 
 struct Y
@@ -26,8 +26,8 @@ public:
 
 int main() {
     X x;
-    //auto f1=std::async(&X::foo,&x,42,"hello");
-    //auto f2=std::async(&X::bar,x,"goodbye");
+    auto f1=std::async(&X::foo,&x,42,"hello");
+    auto f2=std::async(&X::bar,x,"goodbye");
 
     Y y;
     // auto f3=std::async(Y(),3.141);
@@ -35,6 +35,6 @@ int main() {
     // X baz(X&);
     // auto f6=std::async(baz,std::ref(x));
 
-    auto f5=std::async(move_only());
+    // auto f5=std::async(move_only());
     return 0;
 }
