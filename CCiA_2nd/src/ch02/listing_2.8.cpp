@@ -17,7 +17,7 @@ void f0()
         std::mem_fn(&std::thread::join));
 }
 
-void f()
+void f()  // different syntax
 {
     std::vector<std::thread> threads;
     for(unsigned i=0;i<20;++i)

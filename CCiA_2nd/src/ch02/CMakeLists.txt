@@ -1,3 +1,24 @@
+add_executable(example_2_1_joinable example_2_1_joinable.cpp)
+target_link_libraries(example_2_1_joinable pthread)
+
+add_executable(example_2_2_join_detach example_2_2_join_detach.cpp)
+target_link_libraries(example_2_2_join_detach pthread)
+
+add_executable(example_2_3_join_exception example_2_3_join_exception.cpp)
+target_link_libraries(example_2_3_join_exception pthread)
+
+add_executable(example_2_4_pass_arguments example_2_4_pass_arguments.cpp)
+target_link_libraries(example_2_4_pass_arguments pthread)
+
+add_executable(example_2_5_pass_ref_problem example_2_5_pass_ref_problem.cpp)
+target_link_libraries(example_2_5_pass_ref_problem pthread)
+
+add_executable(example_2_6_transfer_ownership example_2_6_transfer_ownership.cpp)
+target_link_libraries(example_2_6_transfer_ownership pthread)
+
+add_executable(example_2_7_utils example_2_7_utils.cpp)
+target_link_libraries(example_2_7_utils pthread)
+
 add_executable(listing_2.1 listing_2.1.cpp)
 target_link_libraries(listing_2.1 pthread)
 
