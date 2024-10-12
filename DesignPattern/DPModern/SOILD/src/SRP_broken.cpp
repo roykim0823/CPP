@@ -17,6 +17,8 @@ struct Journal
 
   void add(const string& entry);
 
+  // persistence is a separate concern
+  void save(const string& filename);
 };
 
 void Journal::add(const string& entry)
@@ -26,16 +28,13 @@ void Journal::add(const string& entry)
     + ": " + entry);
 }
 
-// Better to save in a seperate class
-struct PersistenceManager
+// Problematic approach: code smell
+void Journal::save(const string& filename)
 {
-  static void save(const Journal& j, const string& filename)
-  {
-    ofstream ofs(filename);
-    for (auto& s : j.entries)
-      ofs << s << endl;
-  }
-};
+  ofstream ofs(filename);
+  for (auto& s : entries)
+    ofs << s << endl;
+}
 
 int main()
 {
@@ -43,6 +42,5 @@ int main()
   journal.add("I ate a bug");
   journal.add("I cried today");
 
-  PersistenceManager pm;
-  pm.save(journal, "diary.txt");
+  journal.save("diary.txt");
 }

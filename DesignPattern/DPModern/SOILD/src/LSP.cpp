@@ -1,59 +1,46 @@
-// Objects in a program should be replaceable with instances of their subtypes
+// Objects in a program should be replaceable with instances of their subtypes/drieved types
 // w/o altering the correctness of the program
 
 #include <iostream>
 
-class Rectangle
-{
+class Rectangle {
 protected:
   int width, height;
-public:
   Rectangle(const int width, const int height)
     : width{width}, height{height} { }
 
+public:
+  static Rectangle create_rectangle(int w, int h) {
+    return {w, h};
+  }
+  static Rectangle create_square(int size) {
+    return {size, size};
+  }
+
   int get_width() const { return width; }
-  virtual void set_width(const int width) { this->width = width; }
+
   int get_height() const { return height; }
-  virtual void set_height(const int height) { this->height = height; }
 
   int area() const { return width * height; }
 };
 
-// This inheretance causes a problem since set*() sets both width and height
-class Square : public Rectangle
-{
-public:
-  Square(int size): Rectangle(size,size) {}
-  void set_width(const int width) override {
-    this->width = height = width;
-  }
-  void set_height(const int height) override {
-    this->height = width = height;
-  }
-};
-
-struct RectangleFactory
-{
-  static Rectangle create_rectangle(int w, int h);
-  static Rectangle create_square(int size);
-};
 
 void process(Rectangle& r)
 {
+  // no set_* functions for the simplicity
   int w = r.get_width();
-  r.set_height(10);
-
-  std::cout << "expected area = " << (w * 10) 
+  int h = r.get_height();
+  std::cout << "expected area = " << (w * h) 
     << ", got " << r.area() << std::endl;
 }
 
 int main()
 {
-  Rectangle r{ 3, 4 };
+  Rectangle r = Rectangle::create_rectangle(3, 4);
   process(r);
 
-  Square sq{ 5 };
-  process(sq);
+  Rectangle s = Rectangle::create_square(5);
+  process(s);
 
   return 0;
 }

@@ -16,39 +16,6 @@ struct Product
   Size size;
 };
 
-struct ProductFilter
-{
-  typedef vector<Product*> Items;
-
-  Items by_color(Items items, const Color color)
-  {
-    Items result;
-    for (auto& i : items)
-      if (i->color == color)
-        result.push_back(i);
-    return result;
-  }
-
-	// outright duplication
-  Items by_size(Items items, const Size size)
-  {
-    Items result;
-    for (auto& i : items)
-      if (i->size == size)
-        result.push_back(i);
-    return result;
-  }
-
-	// outright duplication
-  Items by_size_and_color(Items items, const Size size, const Color color)
-  {
-    Items result;
-    for (auto& i : items)
-      if (i->size == size && i->color == color)
-        result.push_back(i);
-    return result;
-  }
-};
 
 template <typename T> struct AndSpecification;
 
@@ -60,7 +27,7 @@ template <typename T> struct Specification
   // new: breaks OCP if you add it post-hoc
   // Use && -> process of filtering by two (or more!)
   //AndSpecification<T> operator&&(Specification<T>&& other)
-  AndSpecification<T> operator&&(Specification<T>& other)
+  AndSpecification<T> operator&&(Specification<T>& other)  // to support &&
   {
     return AndSpecification<T>(*this, other);
   }
