@@ -19,6 +19,9 @@ target_link_libraries(example_2_6_transfer_ownership pthread)
 add_executable(example_2_7_utils example_2_7_utils.cpp)
 target_link_libraries(example_2_7_utils pthread)
 
+add_executable(example_2_8_thread_local example_2_8_thread_local.cpp)
+target_link_libraries(example_2_8_thread_local pthread)
+
 add_executable(listing_2.1 listing_2.1.cpp)
 target_link_libraries(listing_2.1 pthread)
 
