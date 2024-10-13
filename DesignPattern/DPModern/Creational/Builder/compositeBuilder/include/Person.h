@@ -6,8 +6,7 @@ using namespace std;
 
 class PersonBuilder;
 
-class Person
-{
+class Person {
   // address
   std::string street_address, post_code, city;
 
@@ -15,15 +14,13 @@ class Person
   std::string company_name, position;
   int annual_income = 0;
 
-  Person()	// Hide constructor (private)
-  {
+  Person() {	// Hide constructor (private)
     std::cout << "Person created\n";
   }
   
   
 public:
-  ~Person()
-  {
+  ~Person() {
     std::cout << "Person destroyed\n";
   }
   
@@ -36,11 +33,9 @@ public:
       company_name{move(other.company_name)},
       position{move(other.position)},
       annual_income{other.annual_income}
-  {
-  }
+  {}
 
-  Person& operator=(Person&& other)
-  {
+  Person& operator=(Person&& other) {
     if (this == &other)
       return *this;
     street_address = move(other.street_address);
@@ -52,8 +47,7 @@ public:
     return *this;
   }
 
-  friend std::ostream& operator<<(std::ostream& os, const Person& obj)
-  {
+  friend std::ostream& operator<<(std::ostream& os, const Person& obj) {
     return os
       << "street_address: " << obj.street_address
       << " post_code: " << obj.post_code
