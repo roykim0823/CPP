@@ -7,25 +7,23 @@ class Point
   Point(float x, float y) : x(x), y(y) {}
 
   // inner factory class: used in C#, Java those do not have 'friend'
-  class PointFactory
-  {
+  class PointFactory {
     PointFactory() {}
   public:
-    static Point NewCartesian(float x, float y)
-    {
+    static Point NewCartesian(float x, float y) {
       return { x,y };
     }
-    static Point NewPolar(float r, float theta)
-    {
+
+    static Point NewPolar(float r, float theta) {
       return{ r*cos(theta), r*sin(theta) };
     }
   };
+
 public:
   float x, y;
   static PointFactory Factory;  // Singleton pattern: simplify calling name
 
-  friend std::ostream& operator<<(std::ostream& os, const Point& obj)
-  {
+  friend std::ostream& operator<<(std::ostream& os, const Point& obj) {
   	return os
     	<< "x: " << obj.x
     	<< " y: " << obj.y;
@@ -41,7 +39,7 @@ int main()
   // nope!
   // Point::PointFactory pf;
 
-  // if factory is public, then
+  // if the factory class is public, then
   //auto p = Point::PointFactory::NewCartesian(3, 4);
 
   // at any rate, use this

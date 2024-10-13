@@ -2,6 +2,7 @@
 #include <memory>
 #include <map>
 #include "HotDrink.h"
+#include "FunctionalFactory.h"
 using namespace std;
 
 unique_ptr<HotDrink> make_drink(string type)
@@ -20,11 +21,14 @@ unique_ptr<HotDrink> make_drink(string type)
   return drink;
 }
 
-int main()
-{
+int main() {
   auto d = make_drink("tea");
   auto c = make_drink("coffee");
 
+  // Functional Factory
+  DrinkWithVolumeFactory dvf;
+  auto coffee = dvf.make_drink("coffee");
+  auto tea = dvf.make_drink("tea");
   getchar();
   return 0;
 }

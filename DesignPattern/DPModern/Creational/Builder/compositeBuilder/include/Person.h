@@ -18,14 +18,11 @@ class Person {
     std::cout << "Person created\n";
   }
   
-  
 public:
   ~Person() {
     std::cout << "Person destroyed\n";
   }
   
-  static PersonBuilder create();
-
   Person(Person&& other)
     : street_address{move(other.street_address)},
       post_code{move(other.post_code)},
@@ -56,6 +53,8 @@ public:
       << " position: " << obj.position
       << " annual_income: " << obj.annual_income;
   }
+
+  static PersonBuilder create();
 
   friend class PersonBuilder;
   friend class PersonAddressBuilder;

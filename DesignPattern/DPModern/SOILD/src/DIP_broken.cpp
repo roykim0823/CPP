@@ -21,12 +21,7 @@ struct Person
   string name;
 };
 
-struct RelationshipBrowser
-{
-  virtual vector<Person> find_all_children_of(const string& name) = 0;
-};
-
-struct Relationships : RelationshipBrowser // low-level
+struct Relationships
 {
   vector<tuple<Person, Relationship, Person>> relations;
 
@@ -35,41 +30,21 @@ struct Relationships : RelationshipBrowser // low-level
     relations.push_back({parent, Relationship::parent, child});
     relations.push_back({child, Relationship::child, parent});
   }
-
-  vector<Person> find_all_children_of(const string &name) override
-  {
-    vector<Person> result;
-    for (auto&& [first, rel, second] : relations)
-    {
-      if (first.name == name && rel == Relationship::parent)
-      {
-        result.push_back(second);
-      }
-    }
-    return result;
-  }
 };
 
 struct Research // high-level
 {
-  Research(RelationshipBrowser& browser)
-  {
-    for (auto& child : browser.find_all_children_of("John"))
-    {
-      cout << "John has a child called " << child.name << endl;
-    }
-  }
-//  Research(const Relationships& relationships)
-//  {
-//    auto& relations = relationships.relations;
-//    for (auto&& [first, rel, second] : relations)
-//    {
-//      if (first.name == "John" && rel == Relationship::parent)
-//      {
-//        cout << "John has a child called " << second.name << endl;
-//      }
-//    }
-//  }
+ Research(const Relationships& relationships)  // high-level depends on the low-level (Relationships)
+ {
+   auto& relations = relationships.relations;
+   for (auto&& [first, rel, second] : relations)
+   {
+     if (first.name == "John" && rel == Relationship::parent)
+     {
+       cout << "John has a child called " << second.name << endl;
+     }
+   }
+ }
 };
 
 int main()
