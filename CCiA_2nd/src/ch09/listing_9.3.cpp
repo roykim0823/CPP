@@ -1,35 +1,24 @@
-#include <vector>
-#include <future>
+#include <atomic>
+#include <iostream>
 #include <thread>
+#include <vector>
 
-template<typename Iterator,typename T>
-T parallel_accumulate(Iterator first,Iterator last,T init)
-{
-    unsigned long const length=std::distance(first,last);
+#include "parallel_accumulate.h"
 
-    if(!length)
-        return init;
+int main() {
+	std::cout << "Simple thread pool with waiting \n";
+	const int size = 1000;
+	int* my_array = new int[size];
 
-    unsigned long const block_size=25;
-    unsigned long const num_blocks=(length+block_size-1)/block_size;
+	srand(0);
 
-    std::vector<std::future<T> > futures(num_blocks-1);
-    thread_pool pool;
+	for (size_t i = 0; i < size; i++)
+	{
+		//my_array[i] = rand() % 10;
+		my_array[i] = 1;
+	}
 
-    Iterator block_start=first;
-    for(unsigned long i=0;i<(num_threads-1);++i)
-    {
-        Iterator block_end=block_start;
-        std::advance(block_end,block_size);
-        futures[i]=pool.submit(accumulate_block<Iterator,T>());
-        block_start=block_end;
-    }
-    T last_result=accumulate_block()(block_start,last);
-    T result=init;
-    for(unsigned long i=0;i<(num_blocks-1);++i)
-    {
-        result+=futures[i].get();
-    }
-    result += last_result;
-    return result;
+	long result = parallel_accumulate<int*, int>(my_array, my_array + size, 0);
+	std::cout << "final sum is  - " << result << std::endl;
+	return 0;
 }
