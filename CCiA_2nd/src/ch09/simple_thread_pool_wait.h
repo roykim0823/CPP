@@ -54,7 +54,7 @@ public:
         done=true;
     }
 
-    // From listing_9.2.h to wait the submitted tasks
+    // From listing_9.2.cpp to wait the submitted tasks
     template<typename FunctionType>
     std::future<typename std::result_of<FunctionType()>::type>
     submit(FunctionType f)
@@ -67,4 +67,20 @@ public:
 
         res;
     }
+
+    void run_pending_task();
 };
+
+// From listing_9.4.cpp
+void thread_pool_waiting::run_pending_task()
+{
+    function_wrapper task;
+    if(work_queue.try_pop(task))
+    {
+        task();
+    }
+    else
+    {
+        std::this_thread::yield();
+    }
+}
