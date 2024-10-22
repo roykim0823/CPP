@@ -1,58 +1,28 @@
-class thread_pool
+#include <list>
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+#include "include/parallel_sorter.h"
+
+int main()
 {
-    thread_safe_queue<function_wrapper> pool_work_queue;
+	std::cout << "Simple thread pool with waiting for other tasks \n";
+	const int size = 800;
+	std::list<int> my_array;
 
-    typedef std::queue<function_wrapper> local_queue_type;
-    static thread_local std::unique_ptr<local_queue_type>
-        local_work_queue;
-   
-    void worker_thread()
-    {
-        local_work_queue.reset(new local_queue_type);
-        
-        while(!done)
-        {
-            run_pending_task();
-        }
-    }
+	srand(0);
 
-public:
-    template<typename FunctionType>
-    std::future<std::result_of<FunctionType()>::type>
-        submit(FunctionType f)
-    {
-        typedef std::result_of<FunctionType()>::type result_type;
-        
-        std::packaged_task<result_type()> task(f);
-        std::future<result_type> res(task.get_future());
-        if(local_work_queue)
-        {
-            local_work_queue->push(std::move(task));
-        }
-        else
-        {
-            pool_work_queue.push(std::move(task));
-        }
-        return res;
-    }
+	for (size_t i = 0; i < size; i++)
+	{
+		my_array.push_back(rand());
+	}
 
-    void run_pending_task()
-    {
-        function_wrapper task;
-        if(local_work_queue && !local_work_queue->empty())
-        {
-            task=std::move(local_work_queue->front());
-            local_work_queue->pop();
-            task();
-        }
-        else if(pool_work_queue.try_pop(task))
-        {
-            task();
-        }
-        else
-        {
-            std::this_thread::yield();
-        }
-    }
-    // rest as before
-};
+	my_array = parallel_quick_sort<int, ThreadPoolWaitLocalQueue<function_wrapper>>(my_array);
+
+	for (size_t i = 0; i < size; i++)
+	{
+		std::cout << my_array.front() << std::endl;
+		my_array.pop_front();
+	}
+}

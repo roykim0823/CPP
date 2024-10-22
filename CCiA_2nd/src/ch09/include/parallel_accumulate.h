@@ -1,16 +1,18 @@
 #pragma once
 #include <vector>
 #include <future>
+#include <numeric>
 #include <thread>
-#include "simple_thread_pool_wait.h"
+#include "simple_thread_pool.h"
 
+// Listing 9.3 parallel_accumulate using a thread pool with waitable tasks
 template<typename Iterator, typename T>
 struct accumulate_block
 {
 	T operator()(Iterator first, Iterator last)
 	{
 		T value = std::accumulate(first, last, T());
-		printf(" %d - %d  \n", std::this_thread::get_id(), value);
+		printf(" %u - %d  \n", std::this_thread::get_id(), value);
 		return value;
 	}
 };
@@ -29,7 +31,7 @@ T parallel_accumulate(Iterator first,Iterator last,T init)
     unsigned long const num_blocks=(length+block_size-1)/block_size;
 
     std::vector<std::future<T> > futures(num_blocks-1);
-    thread_pool_waiting pool;
+    ThreadPoolWait<function_wrapper> pool;
 
     Iterator block_start=first;
     for(unsigned long i=0;i<(num_blocks-1);++i)

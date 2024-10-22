@@ -7,5 +7,11 @@ target_link_libraries(listing_9.3 pthread)
 add_executable(listing_9.5 listing_9.5.cpp)
 target_link_libraries(listing_9.5 pthread)
 
+add_executable(listing_9.6 listing_9.6.cpp)
+target_link_libraries(listing_9.6 pthread)
+
+add_executable(listing_9.8 listing_9.8.cpp)
+target_link_libraries(listing_9.8 pthread)
+
 # add_executable(listing_9.13 listing_9.13.cpp)
 # target_link_libraries(listing_9.13 pthread)

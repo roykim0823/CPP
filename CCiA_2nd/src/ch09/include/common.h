@@ -42,6 +42,8 @@ public:
 
 };
 
+
+// Listing 9.2 function wrapper to make the task waitable
 class function_wrapper {
 	struct impl_base {
 		virtual void call() = 0;

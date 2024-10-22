@@ -3,7 +3,7 @@
 #include <iostream>
 #include <vector>
 
-#include "parallel_sorter.h"
+#include "include/parallel_sorter.h"
 
 int main()
 {
@@ -18,7 +18,7 @@ int main()
 		my_array.push_back(rand());
 	}
 
-	my_array = parallel_quick_sort(my_array);
+	my_array = parallel_quick_sort<int, ThreadPoolWait<function_wrapper>>(my_array);
 
 	for (size_t i = 0; i < size; i++)
 	{

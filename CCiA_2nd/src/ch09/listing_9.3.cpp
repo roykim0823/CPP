@@ -3,11 +3,11 @@
 #include <thread>
 #include <vector>
 
-#include "parallel_accumulate.h"
+#include "include/parallel_accumulate.h"
 
 int main() {
 	std::cout << "Simple thread pool with waiting \n";
-	const int size = 1000;
+	const int size = 10000;
 	int* my_array = new int[size];
 
 	srand(0);

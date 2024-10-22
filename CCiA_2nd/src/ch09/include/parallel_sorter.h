@@ -1,12 +1,15 @@
+#pragma once
 #include <list>
 #include <iostream>
 
-#include "simple_thread_pool_wait.h"
+#include "simple_thread_pool.h"
+#include "thread_pool.h"
 
-template<typename T>
+// Listing 9.5 A thread-pool-based implementation of Quicksort
+template<typename T, typename U>
 struct sorter {
 
-	thread_pool_waiting pool;
+	U pool;
 
 	std::list<T> do_sort(std::list<T>& chunk_data)
 	{
@@ -36,7 +39,7 @@ struct sorter {
 		result.splice(result.end(), new_higher);
 
 		while(new_lower.wait_for(std::chrono::seconds(0))== std::future_status::timeout)
-		//while (!new_lower._Is_ready())
+		//while (!new_lower._Is_ready())  // proposal
 		{
 			pool.run_pending_task();
 		}
@@ -49,7 +52,7 @@ struct sorter {
 
 };
 
-template<typename T>
+template<typename T, typename U>
 std::list<T> parallel_quick_sort(std::list<T> input)
 {
 	if (input.empty())
@@ -57,6 +60,6 @@ std::list<T> parallel_quick_sort(std::list<T> input)
 		return input;
 	}
 
-	sorter<T> s;
+	sorter<T, U> s;
 	return s.do_sort(input);
 }
