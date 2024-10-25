@@ -45,3 +45,6 @@ target_link_libraries(listing_4.7 pthread)
 
 # add_executable(listing_4.16 listing_4.16.cpp)
 # target_link_libraries(listing_4.16 pthread)
+
+add_executable(example_4_1_driver_and_passner example_4_1_driver_and_passner.cpp)
+target_link_libraries(example_4_1_driver_and_passner pthread)
