@@ -1,6 +1,7 @@
 #include <list>
 #include <mutex>
 #include <algorithm>
+#include <thread>
 
 std::list<int> some_list;
 std::mutex some_mutex;
@@ -21,6 +22,10 @@ bool list_contains(int value_to_find)
 
 int main()
 {
-    add_to_list(42);
+    std::thread t_1(add_to_list, 42);
+    std::thread t_2(add_to_list, 72);
+    t_1.join();
+    t_2.join();
+
     std::cout<<"contains(1)="<<list_contains(1)<<", contains(42)="<<list_contains(42)<<std::endl;
 }

@@ -39,3 +39,6 @@ target_link_libraries(listing_3.13
 						${Boost_SYSTEM_LIBRARY}
 						${Boost_THREAD_LIBRARY}
 )
+
+add_executable(example_3_deadlock_with_mutex example_3_deadlock_with_mutex.cpp)
+target_link_libraries(example_3_deadlock_with_mutex pthread)

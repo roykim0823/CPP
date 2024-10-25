@@ -5,7 +5,7 @@ struct some_resource
 {
     void do_something()
     {}
-    
+
 };
 
 
@@ -28,7 +28,7 @@ void init_resource() {
     resource_ptr.reset(new some_resource);
 }
 void foo_call_once() {
-    std::call_once(resource_flag, init_resource);
+    std::call_once(resource_flag, init_resource);  // Initialization is called exactly once.
     resource_ptr->do_something();
 }
 

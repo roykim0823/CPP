@@ -15,8 +15,8 @@ public:
     threadsafe_stack& operator=(const threadsafe_stack&) = delete;
 
     void push(T new_value);
-    std::shared_ptr<T> pop();
-    void pop(T& value);
+    std::shared_ptr<T> pop();  // option 3: return a pointer to the popped item
+    void pop(T& value);  // option 1: pass in a reference
     bool empty() const;
 };
 
