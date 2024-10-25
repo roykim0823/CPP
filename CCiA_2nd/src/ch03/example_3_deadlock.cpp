@@ -14,17 +14,15 @@ public:
 
 	bank_account(double _balance, std::string _name) :balance(_balance), name(_name) {}
 
-	bank_account(bank_account& const) = delete;
-	bank_account& operator=(bank_account& const) = delete;
+	bank_account(const bank_account&) = delete;
+	bank_account& operator=(const bank_account&) = delete;
 
-	void withdraw(double amount)
-	{
+	void withdraw(double amount) {
 		std::lock_guard<std::mutex> lg(m);
 		balance -= amount;
 	}
 
-	void deposite(double amount)
-	{
+	void deposite(double amount) {
 		std::lock_guard<std::mutex> lg(m);
 		balance += amount;
 	}
@@ -44,13 +42,13 @@ public:
 
 };
 
-void run_code1()
-{
+void run_code1() {
 	bank_account account;
 
 	bank_account account_1(1000, "james");
 	bank_account account_2(2000, "Mathew");
 
+	// !deadlock because thread_2's mutex locking order is the reverse of thread_1's mutex lock
 	std::thread thread_1(&bank_account::transfer, &account, std::ref(account_1), std::ref(account_2), 500);
 	std::this_thread::sleep_for(std::chrono::milliseconds(100));
 	std::thread thread_2(&bank_account::transfer, &account, std::ref(account_2), std::ref(account_1), 200);
@@ -59,15 +57,11 @@ void run_code1()
 	thread_2.join();
 }
 
-
-
 /*********************************************** example 2 ***********************************/
 std::mutex m1;
 std::mutex m2;
 
-
-void m1_frist_m2_second()
-{
+void m1_frist_m2_second() {
 	std::lock_guard<std::mutex> lg1(m1);
 	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 	std::cout << "thread " << std::this_thread::get_id() << " has acquired lock for m1 mutex, its wait for m2 \n";
@@ -76,8 +70,7 @@ void m1_frist_m2_second()
 }
 
 
-void m2_frist_m1_second()
-{
+void m2_frist_m1_second() {
 	std::lock_guard<std::mutex> lg1(m2);
 	std::this_thread::sleep_for(std::chrono::milliseconds(1500));
 	std::cout << "thread " << std::this_thread::get_id() << " has acquired lock for m2 mutex, its wait for m1 \n";
@@ -85,8 +78,8 @@ void m2_frist_m1_second()
 	std::cout << "thread " << std::this_thread::get_id() << " has acquired lock for m1 mutex \n";
 }
 
-void run_code2()
-{
+void run_code2() {
+	// !deadlock due to each thread's mutex locking order is reverse aginst each other.
 	std::thread thread_1(m1_frist_m2_second);
 	std::thread thread_2(m2_frist_m1_second);
 
@@ -95,10 +88,9 @@ void run_code2()
 }
 
 
-int main()
-{
+int main() {
 	run_code1();
-	run_code2();
+	//run_code2();
 
 	return 0;
 }

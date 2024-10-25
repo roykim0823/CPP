@@ -32,7 +32,7 @@ public:
 
 		std::unique_lock<std::mutex> ul_1(from.m, std::defer_lock);
 		std::unique_lock<std::mutex> ul_2(to.m, std::defer_lock);
-		std::lock(ul_1, ul_2);
+		std::lock(ul_1, ul_2);  // lock at once or nothing
 
 		from.balance -= amount;
 		to.balance += amount;
@@ -46,7 +46,6 @@ void run_code() {
 	bank_account account_1(1000, "james");
 	bank_account account_2(2000, "Mathew");
 
-	// deadlock if two threads try to lock in reverse order against each other.
 	std::thread thread_1(&bank_account::transfer, &account, std::ref(account_1), std::ref(account_2), 500);
 	std::thread thread_2(&bank_account::transfer, &account, std::ref(account_2), std::ref(account_1), 200);
 
@@ -54,8 +53,31 @@ void run_code() {
 	thread_2.join();
 }
 
+/***************************************************Example 2 ******************************************/
+
+void x_operations() {
+	std::cout << "this is some operations \n";
+}
+
+void y_operations() {
+	std::cout << "this is some other operations \n";
+}
+
+std::unique_lock<std::mutex> get_lock() {
+	std::mutex m;
+	std::unique_lock<std::mutex> lk(m);
+	x_operations();
+	return lk;  // transfer unique (movable)
+}
+
+void run_code2() {
+	std::unique_lock<std::mutex> lk(get_lock());
+	y_operations();
+}
+
 int main() {
 	run_code();
+	run_code2();
 
 	return 0;
 }
