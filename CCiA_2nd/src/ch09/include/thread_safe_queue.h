@@ -11,7 +11,7 @@ class threadsafe_queue
 {
 private:
 	mutable std::mutex mut;
-	std::queue<std::shared_ptr<T> > data_queue;
+	std::queue<std::shared_ptr<T> > data_queue;  // Use shared_ptr to avoid the bad_alloc exception on push()
 	std::condition_variable data_cond;
 public:
 	threadsafe_queue()
@@ -68,5 +68,4 @@ public:
 		data_queue.push(data);
 		data_cond.notify_one();
 	}
-
 };
