@@ -1,6 +1,7 @@
 #include <iostream>
 #include <future>
 #include <numeric>
+#include <vector>
 
 int MIN_ELEMENT_COUNT = 1000;
 

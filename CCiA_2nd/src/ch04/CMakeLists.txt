@@ -49,5 +49,5 @@ target_link_libraries(example_4_10_promise pthread)
 add_executable(example_4_10_promise_exception example_4_10_promise_exception.cpp)
 target_link_libraries(example_4_10_promise_exception pthread)
 
-add_executable(example_4_10_shared_promise example_4_10_shared_promise.cpp)
-target_link_libraries(example_4_10_shared_promise pthread)
+add_executable(example_4_10_shared_future example_4_10_shared_future.cpp)
+target_link_libraries(example_4_10_shared_future pthread)
