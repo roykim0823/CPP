@@ -27,5 +27,5 @@ int main()
     std::thread b(read_y_then_x);
     a.join();
     b.join();
-    assert(z.load()!=0);
+    assert(z.load()!=0);  // gurantee z.load()!=0 by synch from y (order_release -> order_acquire)
 }

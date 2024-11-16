@@ -27,7 +27,7 @@ void use_x()
         std::this_thread::sleep_for(std::chrono::microseconds(1));
     assert(x->i==42);
     assert(x->s=="hello");
-    assert(a.load(std::memory_order_relaxed)==99);
+    assert(a.load(std::memory_order_relaxed)==99);  // no gurantee
 }
 int main()
 {

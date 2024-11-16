@@ -9,14 +9,29 @@ std::atomic_bool data_ready(false);
 
 void reader_thread()
 {
-    while(!data_ready.load())
+    // synchronized with data_ready
+    while(!data_ready.load())  // happen_before from the access data[0]
     {
         std::this_thread::sleep_for(std::chrono::milliseconds(1));
     }
-    std::cout<<"The answer="<<data[0]<<"\n";
+    // inter-thread happen-before (push_back happens before the access)
+    std::cout<<"The answer = "<< data[0] << "\n";
 }
+
 void writer_thread()
 {
-    data.push_back(42);
+    data.push_back(42);  // happen-before (data_read = true)
     data_ready=true;
+}
+
+void run_code() {
+    std::thread reader(reader_thread);
+    std::thread writer(writer_thread);
+
+    reader.join();
+    writer.join();
+}
+
+int main() {
+    run_code();
 }
