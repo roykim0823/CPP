@@ -14,7 +14,8 @@ private:
     
 public:
     queue():
-        head(new node),tail(head.get())
+    // add dummy node to avoid contention by poining two pointers at the first node.
+        head(new node),tail(head.get())  
     {}
 
     queue(const queue& other)=delete;

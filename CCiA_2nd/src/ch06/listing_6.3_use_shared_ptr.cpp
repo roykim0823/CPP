@@ -8,7 +8,7 @@ class threadsafe_queue
 {
 private:
     mutable std::mutex mut;
-    std::queue<std::shared_ptr<T> > data_queue;
+    std::queue<std::shared_ptr<T> > data_queue;  // use shared_ptr for exception safe on wait_and_pop()
     std::condition_variable data_cond;
 public:
     threadsafe_queue()
@@ -59,7 +59,7 @@ public:
     void push(T new_value)
     {
         std::shared_ptr<T> data(
-            std::make_shared<T>(std::move(new_value)));
+            std::make_shared<T>(std::move(new_value)));  // new shared_ptr is outside of lock
         std::lock_guard<std::mutex> lk(mut);
         data_queue.push(data);
         data_cond.notify_one();

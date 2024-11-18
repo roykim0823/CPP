@@ -7,7 +7,7 @@ template<typename T>
 class threadsafe_queue
 {
 private:
-    mutable std::mutex mut;
+    mutable std::mutex mut;  // single mutex limits the degress of concurrency
     std::queue<T> data_queue;
     std::condition_variable data_cond;
 public:
@@ -21,7 +21,7 @@ public:
         data_cond.notify_one();
     }
 
-    void wait_and_pop(T& value)
+    void wait_and_pop(T& value)  // avoid keeping calling the empty to check the existence of data
     {
         std::unique_lock<std::mutex> lk(mut);
         data_cond.wait(lk,[this]{return !data_queue.empty();});
