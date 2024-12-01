@@ -2,6 +2,8 @@
 #include <future>
 #include <numeric>
 #include <vector>
+#include <syncstream>
+#include <thread>
 
 int MIN_ELEMENT_COUNT = 1000;
 
@@ -12,7 +14,7 @@ int parallal_accumulate(iterator begin, iterator end) {
 	//atleast runs 1000 element
 	if (length <= MIN_ELEMENT_COUNT)
 	{
-		std::cout << std::this_thread::get_id() << std::endl;
+		std::osyncstream(std::cout) << std::this_thread::get_id() << std::endl;
 		return std::accumulate(begin, end, 0);
 	}
 

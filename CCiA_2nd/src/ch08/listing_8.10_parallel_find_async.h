@@ -1,5 +1,7 @@
+#pragma once
 #include <atomic>
 #include <future>
+
 template<typename Iterator,typename MatchType>
 Iterator parallel_find_impl(Iterator first,Iterator last,MatchType match,
                             std::atomic<bool>& done)

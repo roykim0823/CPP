@@ -1,13 +1,11 @@
+#pragma once
 #include <future>
 #include <algorithm>
-struct join_threads
-{
-    join_threads(std::vector<std::thread>&)
-    {}
-};
+
+#include "include/common.h"
 
 template<typename Iterator,typename MatchType>
-Iterator parallel_find(Iterator first,Iterator last,MatchType match)
+Iterator parallel_find(Iterator first, Iterator last, MatchType match)
 {
     struct find_element
     {
@@ -23,7 +21,7 @@ Iterator parallel_find(Iterator first,Iterator last,MatchType match)
                     if(*begin==match)
                     {
                         result->set_value(begin);
-                        done_flag->store(true);
+                        done_flag->store(true);  // std::atomic_store(done_flag, true);  -> replacement?
                         return;
                     }
                 }
@@ -64,22 +62,29 @@ Iterator parallel_find(Iterator first,Iterator last,MatchType match)
     {
         join_threads joiner(threads);
 
+        // task dividing loop
         Iterator block_start=first;
         for(unsigned long i=0;i<(num_threads-1);++i)
         {
             Iterator block_end=block_start;
             std::advance(block_end,block_size);
+
+            // need to launch threads with tasks
             threads[i]=std::thread(find_element(),
                                    block_start,block_end,match,
                                    &result,&done_flag);
             block_start=block_end;
         }
+        // perform the find operation for final block in this thread
         find_element()(block_start,last,match,&result,&done_flag);
     }
+
+    // not found returns the last element
     if(!done_flag.load())
     {
         return last;
     }
+
     return result.get_future().get();
 }
 

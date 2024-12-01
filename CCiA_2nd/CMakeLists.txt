@@ -1,7 +1,8 @@
 cmake_minimum_required (VERSION 3.20)
 project(CCiA CXX)
 
-set(CMAKE_CXX_FLAGS "--std=c++17")
+set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
+set(CMAKE_CXX_FLAGS "--std=c++20")
 
 set(CXX_FLAGS
  -g

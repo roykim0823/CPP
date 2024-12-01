@@ -16,8 +16,8 @@ target_link_libraries(listing_4.7 pthread)
 # add_executable(listing_4.12 listing_4.12.cpp)
 # target_link_libraries(listing_4.12 pthread)
 
-# add_executable(listing_4.13 listing_4.13.cpp)
-# target_link_libraries(listing_4.13 pthread)
+add_executable(listing_4.13_sort_test listing_4.13_sort_test.cpp)
+target_link_libraries(listing_4.13_sort_test pthread)
 
 # add_executable(listing_4.14 listing_4.14.cpp)
 # target_link_libraries(listing_4.14 pthread)

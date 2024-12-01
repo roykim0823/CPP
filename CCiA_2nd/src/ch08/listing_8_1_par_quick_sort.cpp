@@ -2,6 +2,7 @@
 #include <vector>
 #include <future>
 #include <list>
+
 template<typename T>
 struct sorter
 {

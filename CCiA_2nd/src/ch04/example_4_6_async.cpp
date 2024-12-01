@@ -1,23 +1,25 @@
 #include <iostream>
 #include <future>
 #include <string>
+#include <syncstream>
+#include <thread>
 
 void printing() {
-	std::cout << "printing runs on tid: " << std::this_thread::get_id() << std::endl;
+	std::osyncstream(std::cout) << "printing runs on tid: " << std::this_thread::get_id() << std::endl;
 }
 
 int addition(int x, int y) {
-	std::cout << "addition runs on tid: " << std::this_thread::get_id() << std::endl;
+	std::osyncstream(std::cout) << "addition runs on tid: " << std::this_thread::get_id() << std::endl;
 	return x + y;
 }
 
 int substract(int x, int y) {
-	std::cout << "substract runs on tid: " << std::this_thread::get_id() << std::endl;
+	std::osyncstream(std::cout) << "substract runs on tid: " << std::this_thread::get_id() << std::endl;
 	return x - y;
 }
 
 int main() {
-	std::cout << "main thread id: " << std::this_thread::get_id() << std::endl;
+	std::osyncstream(std::cout) << "main thread id: " << std::this_thread::get_id() << std::endl;
 
 	int x = 100;
 	int y = 50;

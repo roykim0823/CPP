@@ -1,10 +1,8 @@
+#pragma once
 #include <future>
 #include <algorithm>
-struct join_threads
-{
-    join_threads(std::vector<std::thread>&)
-    {}
-};
+
+#include "include/common.h"
 
 template<typename Iterator,typename Func>
 void parallel_for_each(Iterator first,Iterator last,Func f)
@@ -14,6 +12,7 @@ void parallel_for_each(Iterator first,Iterator last,Func f)
     if(!length)
         return;
 
+    // Calculate the optimized number of threads to run the algorithm
     unsigned long const min_per_thread=25;
     unsigned long const max_threads=
         (length+min_per_thread-1)/min_per_thread;
@@ -26,6 +25,7 @@ void parallel_for_each(Iterator first,Iterator last,Func f)
 
     unsigned long const block_size=length/num_threads;
 
+    // Declare the needed data structure
     std::vector<std::future<void> > futures(num_threads-1);
     std::vector<std::thread> threads(num_threads-1);
     join_threads joiner(threads);
@@ -44,7 +44,10 @@ void parallel_for_each(Iterator first,Iterator last,Func f)
         threads[i]=std::thread(std::move(task));
         block_start=block_end;
     }
+
+    // call the function for last block from this thread
     std::for_each(block_start,last,f);
+
     for(unsigned long i=0;i<(num_threads-1);++i)
     {
         futures[i].get();

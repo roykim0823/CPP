@@ -51,11 +51,10 @@ int main() {
     {
         vector<double> sorted(doubles);
         const auto startTime = high_resolution_clock::now();
-        // same sort call as above, but with par_unseq:
         std::sort(std::execution::seq, sorted.begin(), sorted.end());
         const auto endTime = high_resolution_clock::now();
         // in our output, note that these are the parallel results:
-        print_results("Parallel STL", sorted, startTime, endTime);
+        print_results("Parallel STL(seq)", sorted, startTime, endTime);
     }
 
     for (int i = 0; i < iterationCount; ++i)
@@ -65,7 +64,7 @@ int main() {
         std::sort(std::execution::par, sorted.begin(), sorted.end());
         const auto endTime = high_resolution_clock::now();
         // in our output, note that these are the parallel results:
-        print_results("Parallel STL", sorted, startTime, endTime);
+        print_results("Parallel STL(par)", sorted, startTime, endTime);
     }
 
     for (int i = 0; i < iterationCount; ++i)
@@ -73,9 +72,9 @@ int main() {
         vector<double> sorted(doubles);
         const auto startTime = high_resolution_clock::now();
         // same sort call as above, but with par_unseq:
-        std::sort(std::execution::par_unseq, sorted.begin(), sorted.end());
+        std::sort(std::execution::par_unseq, sorted.begin(), sorted.end());  // same as the `par`
         const auto endTime = high_resolution_clock::now();
         // in our output, note that these are the parallel results:
-        print_results("Parallel STL", sorted, startTime, endTime);
+        print_results("Parallel STL(unseq)", sorted, startTime, endTime);
     }
 }

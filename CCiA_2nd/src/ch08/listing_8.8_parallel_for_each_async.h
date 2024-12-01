@@ -1,7 +1,9 @@
+#pragma once
 #include <future>
 #include <algorithm>
+
 template<typename Iterator,typename Func>
-void parallel_for_each(Iterator first,Iterator last,Func f)
+void parallel_for_each_async(Iterator first,Iterator last,Func f)
 {
     unsigned long const length=std::distance(first,last);
 
@@ -18,9 +20,9 @@ void parallel_for_each(Iterator first,Iterator last,Func f)
     {
         Iterator const mid_point=first+length/2;
         std::future<void> first_half=
-            std::async(&parallel_for_each<Iterator,Func>,
+            std::async(&parallel_for_each_async<Iterator,Func>,
                        first,mid_point,f);
-        parallel_for_each(mid_point,last,f);
+        parallel_for_each_async(mid_point,last,f);
         first_half.get();
     }
 }
