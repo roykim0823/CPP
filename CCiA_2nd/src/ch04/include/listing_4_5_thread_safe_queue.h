@@ -1,16 +1,16 @@
 #pragma once
-#include <mutex>
+
 #include <condition_variable>
 #include <iostream>
-#include <queue>
 #include <memory>
-
+#include <mutex>
+#include <queue>
 
 template<typename T>
 class threadsafe_queue
 {
 private:
-    mutable std::mutex mut;
+    mutable std::mutex mut;  // the mutex must be mutable
     std::queue<T> data_queue;
     std::condition_variable data_cond;
 public:
@@ -22,9 +22,10 @@ public:
 
     void push(T new_value) {
         std::lock_guard<std::mutex> lk(mut);
-        std::cout << "push(" << new_value << ")" << std::endl;
         data_queue.push(new_value);
         data_cond.notify_one();
+
+        std::cout << "push(" << new_value << ")" << std::endl;
     }
 
     void wait_and_pop(T& value) {
@@ -32,6 +33,7 @@ public:
         data_cond.wait(lk,[this]{return !data_queue.empty();});
         value=data_queue.front();
         data_queue.pop();
+
         std::cout << "void wait_and_pop(" << value << ")" << std::endl;
     }
 
@@ -40,6 +42,7 @@ public:
         data_cond.wait(lk,[this]{return !data_queue.empty();});
         std::shared_ptr<T> res(std::make_shared<T>(data_queue.front()));
         data_queue.pop();
+
         std::cout << "std::shared_ptr<T> wait_and_pop(" << *res << ")" << std::endl;
         return res;
     }

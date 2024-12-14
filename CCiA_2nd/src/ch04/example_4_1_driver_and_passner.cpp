@@ -25,7 +25,7 @@ void keep_driving() {
 	std::cout << "Bus arrived the final stop, distance_coverd = " << distance_coverd << std::endl;;
 }
 
-// option 1
+// option 1: busy waiting
 void keep_awake_all_night() {
 	while (distance_coverd < distance_my_destination) {
 		std::cout << "keep check, whether i am there \n";
@@ -34,7 +34,7 @@ void keep_awake_all_night() {
 	std::cout << "Keep check, finally i am there, distance_coverd = " << distance_coverd << std::endl;;
 }
 
-// option2
+// option 2: Polling on every curtain time gap
 void set_the_alarm_and_take_a_nap() {
 	while (distance_coverd < distance_my_destination) {
 		std::cout << "let me take a nap \n";
@@ -43,7 +43,7 @@ void set_the_alarm_and_take_a_nap() {
 	std::cout << "Alarm rings, finally i am there, distance_coverd = " << distance_coverd << std::endl;;
 }
 
-// option3
+// option 3: Using an interrupt
 void ask_driver_to_wake_u_up_at_right_time() {
 	std::unique_lock<std::mutex> ul(m);
 	cv.wait(ul, [] {return distance_coverd == distance_my_destination;});  // it goes sleep if the condition is not true.

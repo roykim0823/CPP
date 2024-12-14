@@ -10,40 +10,31 @@
 template<typename T>
 class sequential_queue1 {
 
-	struct node
-	{
+	struct node	{
 		T data;
 		std::unique_ptr<node> next;
 
-		node(T _data) : data(std::move(_data))
-		{
-		}
+		node(T _data) : data(std::move(_data)) {}
 	};
 
 	std::unique_ptr<node> head;
 	node* tail;
 
 	public:
-	void push(T value)
-	{
+	void push(T value) {
 		std::unique_ptr<node> new_node(new node(std::move(value)));
 		node* const new_tail = new_node.get();
 
-		if (tail)
-		{
+		if (tail) {
 			tail->next = std::move(new_node);
-		}
-		else
-		{
+		} else {
 			head = std::move(new_node);
 		}
 		tail = new_tail;
 	}
 
-	std::shared_ptr<T> pop()
-	{
-		if (!head)
-		{
+	std::shared_ptr<T> pop() {
+		if (!head) {
 			return std::shared_ptr<T>();
 		}
 		std::shared_ptr<T> const res(std::make_shared<T>(std::move(head->data)));
