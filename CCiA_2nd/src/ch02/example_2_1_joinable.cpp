@@ -8,12 +8,12 @@ void test()
 	std::cout << "hello from test \n";
 }
 
-void run() {
+void thread_without_join() {
 	std::thread thread1(test);
 }
 
 int main() {
-	// run();  // error due to without join()
+	// thread_without_join();  // error due to without join()
 
 	std::thread thread1(test);
 

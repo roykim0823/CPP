@@ -25,8 +25,8 @@ int main() {
 
 	std::thread thread_3 = std::move(thread_2);
 
-	//this is wrong
-	//thread_1 = std::move(thread_3);  // cause exception
+	// this is wrong
+	// thread_1 = std::move(thread_3);  // cause exception when it move to active thread
 
 	thread_1.join();
 	// thread_2.join();  // thread_2 is already moved -> exception

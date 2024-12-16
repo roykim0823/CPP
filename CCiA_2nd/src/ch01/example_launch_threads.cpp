@@ -1,16 +1,14 @@
 #include <iostream>
 #include <thread>
 
-void func()
-{
+void func() {
 	std::this_thread::sleep_for(std::chrono::milliseconds(10));
 	std::cout << "Hello from function: " << std::this_thread::get_id() << std::endl;
 }
 
 class my_class {
 public:
-	void operator()()
-	{
+	void operator()() {
 		std::this_thread::sleep_for(std::chrono::milliseconds(20));
 		std::cout << "Hello from the class with function call operator: " << std::this_thread::get_id() << std::endl;
 	}

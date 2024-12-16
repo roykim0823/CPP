@@ -2,19 +2,17 @@
 #include <iostream>
 #include <thread>
 
-
-
 std::atomic<int> i = 0;
-thread_local std::atomic<int> j = 0;
+thread_local std::atomic<int> j = 0;  // each thread has its own j
 
 void foo() {
     ++i;
-    std::cout << i;
+    std::cout << "i = " << i << std::endl;
 }
 
 void bar() {
     ++j;
-    std::cout << j;
+    std::cout << "j = " << j << std::endl;
 }
 
 int main() {
@@ -29,7 +27,6 @@ int main() {
     std::cout << std::endl;
 
 	// Use thread local
-
 	std::thread t4(bar);
     std::thread t5(bar);
     std::thread t6(bar);

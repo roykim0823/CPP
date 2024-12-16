@@ -15,7 +15,7 @@ struct func
     {
         for(unsigned j=0;j<1000000;++j)
         {
-            do_something(i);
+            do_something(i);  // ERR: Potential access to dangling reference
         }
     }
 };
@@ -26,7 +26,7 @@ void oops()
     int some_local_state=0;
     func my_func(some_local_state);
     std::thread my_thread(my_func);
-    my_thread.detach();
+    my_thread.detach();  // ERR: some_local_state will be lost after detach();
 }
 
 int main()

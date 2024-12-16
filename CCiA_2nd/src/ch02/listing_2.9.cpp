@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "naive_parallel_accumulate.h"
+#include "include/listing_2_9_naive_parallel_accumulate.h"
 
 int main()
 {

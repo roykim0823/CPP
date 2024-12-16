@@ -31,9 +31,6 @@ target_link_libraries(listing_4.13_sort_test pthread)
 add_executable(example_4_1_driver_and_passner example_4_1_driver_and_passner.cpp)
 target_link_libraries(example_4_1_driver_and_passner pthread)
 
-add_executable(example_4_5_thread_safe_queue_low_level example_4_5_thread_safe_queue_low_level.cpp)
-target_link_libraries(example_4_5_thread_safe_queue_low_level pthread)
-
 add_executable(example_4_6_async example_4_6_async.cpp)
 target_link_libraries(example_4_6_async pthread)
 

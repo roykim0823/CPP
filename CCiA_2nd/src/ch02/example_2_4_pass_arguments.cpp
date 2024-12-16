@@ -28,7 +28,7 @@ void run_pass_x() {
 	int x = 9;
 	std::cout << "Main thread current value of X is : " << x << std::endl;
 	// std::thread thread1(pass_ref, x);  // compilation error
-	std::thread thread1(pass_ref, std::ref(x));  // compilation error
+	std::thread thread1(pass_ref, std::ref(x));
 	std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
 	x = 15;

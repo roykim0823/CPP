@@ -2,7 +2,7 @@
 #include <thread>
 #include <stdexcept>
 #include <chrono>
-#include "common_objs.h"
+#include "include/common_objs.h"
 
 void foo() {
 	std::this_thread::sleep_for(std::chrono::milliseconds(500));
@@ -50,8 +50,8 @@ void raii_version() {
 int main() {
 	// compile each function separately
 
-	// try_block_only();  // terminate
-	// catch_include_join();
+	// try_block_only();  // Aborted (core dumped)
+	catch_include_join();
 	raii_version();
 
 	return 0;
