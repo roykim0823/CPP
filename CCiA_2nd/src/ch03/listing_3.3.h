@@ -19,7 +19,5 @@ public:
     void push(T&&);
     void pop();
     void swap(stack&&);
+    template <class... Args> void emplace(Args&&... args);  // new in C++14
 };
-
-int main()
-{}

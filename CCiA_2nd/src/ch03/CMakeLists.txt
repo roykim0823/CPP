@@ -4,26 +4,14 @@ target_link_libraries(listing_3.1 pthread)
 add_executable(listing_3.2 listing_3.2.cpp)
 target_link_libraries(listing_3.2 pthread)
 
-add_executable(listing_3.3 listing_3.3.cpp)
-target_link_libraries(listing_3.3 pthread)
-
-add_executable(listing_3.4 listing_3.4.cpp)
-target_link_libraries(listing_3.4 pthread)
-
 add_executable(listing_3.5 listing_3.5.cpp)
 target_link_libraries(listing_3.5 pthread)
-
-add_executable(listing_3.6 listing_3.6.cpp)
-target_link_libraries(listing_3.6 pthread)
 
 add_executable(listing_3.7 listing_3.7.cpp)
 target_link_libraries(listing_3.7 pthread)
 
 add_executable(listing_3.8 listing_3.8.cpp)
 target_link_libraries(listing_3.8 pthread)
-
-add_executable(listing_3.9 listing_3.9.cpp)
-target_link_libraries(listing_3.9 pthread)
 
 add_executable(listing_3.10 listing_3.10.cpp)
 target_link_libraries(listing_3.10 pthread)
@@ -40,8 +28,8 @@ target_link_libraries(listing_3.13
 						${Boost_THREAD_LIBRARY}
 )
 
-add_executable(example_3_deadlock example_3_deadlock.cpp)
-target_link_libraries(example_3_deadlock pthread)
+add_executable(example_3_6_deadlock example_3_6_deadlock.cpp)
+target_link_libraries(example_3_6_deadlock pthread)
 
-add_executable(example_3_deadlock_resolved example_3_deadlock_resolved.cpp)
-target_link_libraries(example_3_deadlock_resolved pthread)
+add_executable(example_3_7_deadlock_resolved example_3_7_deadlock_resolved.cpp)
+target_link_libraries(example_3_7_deadlock_resolved pthread)

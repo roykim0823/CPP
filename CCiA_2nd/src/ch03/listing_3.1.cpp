@@ -11,6 +11,7 @@ void add_to_list(int new_value)
     std::lock_guard<std::mutex> guard(some_mutex);
     some_list.push_back(new_value);
 }
+
 bool list_contains(int value_to_find)
 {
     std::lock_guard<std::mutex> guard(some_mutex);
@@ -27,5 +28,5 @@ int main()
     t_1.join();
     t_2.join();
 
-    std::cout<<"contains(1)="<<list_contains(1)<<", contains(42)="<<list_contains(42)<<std::endl;
+    std::cout << "contains(1)= " <<list_contains(1) << ", contains(42)= " << list_contains(42) << std::endl;
 }

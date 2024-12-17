@@ -19,6 +19,3 @@ public:
     void pop(T& value);  // option 1: pass in a reference
     bool empty() const;
 };
-
-int main()
-{}
