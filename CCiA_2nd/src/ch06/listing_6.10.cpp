@@ -1,46 +1,27 @@
-#include <memory>
-#include <mutex>
-template<typename T>
-class threadsafe_queue
+#include <iostream>
+#include "include/listing_6.10_queue_fine_lock_final.h"
+
+int main()
 {
-private:
-    std::unique_ptr<node> try_pop_head()
-    {
-        std::lock_guard<std::mutex> head_lock(head_mutex);
-        if(head.get()==get_tail())
-        {
-            return std::unique_ptr<node>();
-        }
-        return pop_head();
-    }
+	threadsafe_queue<int> queueInteger;
+	queueInteger.push(5645);
+	queueInteger.push(87456);
+	queueInteger.push(94564);
+	queueInteger.push(2347);
+	queueInteger.push(634);
 
-    std::unique_ptr<node> try_pop_head(T& value)
-    {
-        std::lock_guard<std::mutex> head_lock(head_mutex);
-        if(head.get()==get_tail())
-        {
-            return std::unique_ptr<node>();
-        }
-        value=std::move(*head->data);
-        return pop_head();
-    }
+	queueInteger.printData();
 
-public:
-    std::shared_ptr<T> try_pop()
-    {
-        std::unique_ptr<node> const old_head=try_pop_head();
-        return old_head?old_head->data:std::shared_ptr<T>();
-    }
+	std::cout << "Removing: " << *(queueInteger.try_pop().get()) << std::endl;
+	std::cout << "Removing: " << *(queueInteger.try_pop().get()) << std::endl;
+	std::cout << "Removing by wait_pop(): " << *(queueInteger.wait_and_pop().get()) << std::endl;
+	queueInteger.printData();
 
-    bool try_pop(T& value)
-    {
-        std::unique_ptr<node> const old_head=try_pop_head(value);
-        return old_head;
-    }
+	std::cout << "Removing by wait_pop(): " << *(queueInteger.wait_and_pop().get()) << std::endl;
+	queueInteger.printData();
 
-    bool empty()
-    {
-        std::lock_guard<std::mutex> head_lock(head_mutex);
-        return (head==get_tail());
-    }
-};
+	std::cout << "Removing: " << *(queueInteger.try_pop().get()) << std::endl;
+	queueInteger.printData();
+
+	return 0;
+}

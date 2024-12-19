@@ -32,7 +32,7 @@ public:
 
 		std::unique_lock<std::mutex> ul_1(from.m, std::defer_lock);
 		std::unique_lock<std::mutex> ul_2(to.m, std::defer_lock);
-		std::lock(ul_1, ul_2);  // lock at once or nothing
+		std::lock(ul_1, ul_2);  // lock at once or nothing to avoid deadlock
 
 		from.balance -= amount;
 		to.balance += amount;
@@ -40,7 +40,7 @@ public:
 	}
 };
 
-void run_code() {
+void run_bank_transfer() {
 	bank_account account;
 
 	bank_account account_1(1000, "james");
@@ -70,14 +70,14 @@ std::unique_lock<std::mutex> get_lock() {
 	return lk;  // transfer unique (movable)
 }
 
-void run_code2() {
+void run_unique_lock_transfer() {
 	std::unique_lock<std::mutex> lk(get_lock());
 	y_operations();
 }
 
 int main() {
-	run_code();
-	run_code2();
+	run_bank_transfer();
+	run_unique_lock_transfer();
 
 	return 0;
 }

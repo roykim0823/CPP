@@ -3,6 +3,7 @@
 #include <mutex>
 #include <memory>
 
+// This is same as ch03/include/listing_3_5_thread_safe.h
 struct empty_stack: std::exception
 {
     const char* what() const throw()
@@ -19,20 +20,19 @@ private:
     mutable std::mutex m;
 public:
     threadsafe_stack(){}
-    threadsafe_stack(const threadsafe_stack& other)
-    {
+    threadsafe_stack(const threadsafe_stack& other) {
         std::lock_guard<std::mutex> lock(other.m);
         data=other.data;
     }
+
     threadsafe_stack& operator=(const threadsafe_stack&) = delete;
 
-    void push(T new_value)
-    {
+    void push(T new_value) {
         std::lock_guard<std::mutex> lock(m);
         data.push(std::move(new_value));
     }
-    std::shared_ptr<T> pop()
-    {
+
+    std::shared_ptr<T> pop() {
         std::lock_guard<std::mutex> lock(m);
         if(data.empty()) throw empty_stack();
         std::shared_ptr<T> const res(
@@ -40,15 +40,15 @@ public:
         data.pop();
         return res;
     }
-    void pop(T& value)
-    {
+
+    void pop(T& value) {
         std::lock_guard<std::mutex> lock(m);
         if(data.empty()) throw empty_stack();
         value=std::move(data.top());
         data.pop();
     }
-    bool empty() const
-    {
+
+    bool empty() const {
         std::lock_guard<std::mutex> lock(m);
         return data.empty();
     }

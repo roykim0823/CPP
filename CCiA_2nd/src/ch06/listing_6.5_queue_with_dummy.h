@@ -8,23 +8,21 @@ private:
         std::shared_ptr<T> data;
         std::unique_ptr<node> next;
     };
-    
+
     std::unique_ptr<node> head;
     node* tail;
-    
+
 public:
     queue():
-    // add dummy node to avoid contention by poining two pointers at the first node.
-        head(new node),tail(head.get())  
+        // add dummy node to avoid contention by poining two pointers at the first node.
+        head(new node), tail(head.get())
     {}
 
     queue(const queue& other)=delete;
     queue& operator=(const queue& other)=delete;
 
-    std::shared_ptr<T> try_pop()
-    {
-        if(head.get()==tail)
-        {
+    std::shared_ptr<T> try_pop() {
+        if(head.get()==tail) {
             return std::shared_ptr<T>();
         }
         std::shared_ptr<T> const res(head->data);
@@ -32,12 +30,13 @@ public:
         head=std::move(old_head->next);
         return res;
     }
-    
-    void push(T new_value)
-    {
-        std::shared_ptr<T> new_data(
-            std::make_shared<T>(std::move(new_value)));
+
+    void push(T new_value) {
+        // Change the current dummy nodes data value
+        std::shared_ptr<T> new_data(std::make_shared<T>(std::move(new_value)));
         std::unique_ptr<node> p(new node);
+
+        // Add new dummy node to tail
         tail->data=new_data;
         node* const new_tail=p.get();
         tail->next=std::move(p);
