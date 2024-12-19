@@ -27,6 +27,3 @@ public:
         swap(lhs.some_detail,rhs.some_detail);
     }
 };
-
-int main()
-{}
