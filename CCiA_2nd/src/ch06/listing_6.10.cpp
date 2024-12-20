@@ -1,8 +1,7 @@
 #include <iostream>
 #include "include/listing_6.10_queue_fine_lock_final.h"
 
-int main()
-{
+int main() {
 	threadsafe_queue<int> queueInteger;
 	queueInteger.push(5645);
 	queueInteger.push(87456);
