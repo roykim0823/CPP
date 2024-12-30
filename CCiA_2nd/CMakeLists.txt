@@ -20,6 +20,7 @@ set(CXX_FLAGS
  # -Wshadow
  # -Wwrite-strings
  # -march=native
+ -fcoroutines
  )
 
 set(CMAKE_CXX_FLAGS_DEBUG "-O0")
