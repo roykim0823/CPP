@@ -42,5 +42,5 @@ int main()
     b.join();
     c.join();
     d.join();
-    assert(z.load()!=0);  // no gurantee, no order between write_x() and write_y()
+    assert(z.load()!=0);  // no gurantee, no order between two threads: write_x() and write_y()
 }

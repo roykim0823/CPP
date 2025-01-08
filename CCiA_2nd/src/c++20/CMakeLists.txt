@@ -5,5 +5,4 @@ add_executable(2_jthread_local 2_jthread_local.cpp)
 target_link_libraries(2_jthread_local pthread)
 
 add_executable(3_coroutines 3_coroutines.cpp)
-#target_compile_options(3_coroutines PRIVATE "-fcoroutines")
-target_link_libraries(3_coroutines pthread coro_cpp20)
+target_link_libraries(3_coroutines pthread)

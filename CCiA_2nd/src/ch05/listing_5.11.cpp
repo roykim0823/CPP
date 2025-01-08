@@ -13,7 +13,7 @@ void process(int data){
     std::cout << data << std::endl;
 }
 
-void populate_queue()
+void populate_queue()  // write
 {
     unsigned const number_of_items=20;
     queue_data.clear();
@@ -25,7 +25,7 @@ void populate_queue()
     count.store(number_of_items,std::memory_order_release);
 }
 
-void consume_queue_items()
+void consume_queue_items()  // read
 {
     while(true)
     {
@@ -33,7 +33,7 @@ void consume_queue_items()
         if((item_index = count.fetch_sub(1,std::memory_order_acquire))<=0)
         {
             wait_for_more_items();
-            // continue;
+            //continue;
             break;  // to end the execution when the count becomes 0
         }
         process(queue_data[item_index-1]);
