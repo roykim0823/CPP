@@ -42,5 +42,6 @@ int main()
     b.join();
     c.join();
     d.join();
+    // acquire_release doesn't imply a total ordering
     assert(z.load()!=0);  // no gurantee, no order between two threads: write_x() and write_y()
 }

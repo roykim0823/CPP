@@ -1,7 +1,7 @@
 #include <atomic>
 #include <thread>
 #include <vector>
-#include <iostream> 
+#include <iostream>
 std::vector<int> queue_data;
 std::atomic<int> count;
 
@@ -21,8 +21,8 @@ void populate_queue()  // write
     {
         queue_data.push_back(i);
     }
-    
-    count.store(number_of_items,std::memory_order_release);
+
+    count.store(number_of_items,std::memory_order_release);  // initial store
 }
 
 void consume_queue_items()  // read
@@ -36,7 +36,7 @@ void consume_queue_items()  // read
             //continue;
             break;  // to end the execution when the count becomes 0
         }
-        process(queue_data[item_index-1]);
+        process(queue_data[item_index-1]);  // reading queue is safe
     }
 }
 
