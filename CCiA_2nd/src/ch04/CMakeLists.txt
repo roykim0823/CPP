@@ -10,23 +10,8 @@ target_link_libraries(listing_4.6 pthread)
 add_executable(listing_4.7 listing_4.7.cpp)
 target_link_libraries(listing_4.7 pthread)
 
-# add_executable(listing_4.11 listing_4.11.cpp)
-# target_link_libraries(listing_4.11 pthread)
-
-# add_executable(listing_4.12 listing_4.12.cpp)
-# target_link_libraries(listing_4.12 pthread)
-
 add_executable(listing_4.13_sort_test listing_4.13_sort_test.cpp)
 target_link_libraries(listing_4.13_sort_test pthread)
-
-# add_executable(listing_4.14 listing_4.14.cpp)
-# target_link_libraries(listing_4.14 pthread)
-
-# add_executable(listing_4.15 listing_4.15.cpp)
-# target_link_libraries(listing_4.15 pthread)
-
-# add_executable(listing_4.16 listing_4.16.cpp)
-# target_link_libraries(listing_4.16 pthread)
 
 add_executable(example_4_1_driver_and_passner example_4_1_driver_and_passner.cpp)
 target_link_libraries(example_4_1_driver_and_passner pthread)
