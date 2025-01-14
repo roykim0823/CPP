@@ -33,8 +33,5 @@ std::list<T> parallel_quick_sort(std::list<T> input)
     result.splice(result.end(), new_higher);
     result.splice(result.begin(), new_lower.get());
 
-    // result.splice(result.end(), new_higher_fugure.get());
-    // result.splice(result.begin(), new_lower);
-
     return result;  // WRONG!!: result.size() is much smaller than the original input.size()
 }

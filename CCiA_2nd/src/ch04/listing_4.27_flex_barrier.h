@@ -51,7 +51,7 @@ void process_data(data_source &source, data_sink &sink) {
     split_source();
 
     result_block result;
-    
+
     std::experimental::flex_barrier sync(num_threads, [&] {
         sink.write_data(std::move(result));
         split_source();
