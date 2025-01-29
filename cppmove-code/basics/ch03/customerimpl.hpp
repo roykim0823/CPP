@@ -49,7 +49,8 @@ class Customer {
   }
 
   // move constructor (move all members):
-  Customer(Customer&& cust)                // noexcept declaration missing
+  Customer(Customer&& cust)  // noexcept declaration missing
+                             // noexcept removes the COPY for vector reallocation!!
    : name{std::move(cust.name)}, values{std::move(cust.values)} {
       std::cout << "MOVE " << name << '\n';
   }
