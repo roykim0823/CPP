@@ -15,11 +15,10 @@ public:
 };
 
 int main() {
-	//create thread using fuction
-	std::thread thread1(func);
+	std::thread thread1(func);  // create thread using fuction
 
-	//create thread using class with function call operator, callable object
-	my_class mc;
+
+	my_class mc; // create thread using class with function call operator, callable object
 	std::thread thread2(mc);
 
 	//create thread using lambda expression

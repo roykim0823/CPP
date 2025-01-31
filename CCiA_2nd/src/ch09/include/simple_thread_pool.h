@@ -2,6 +2,7 @@
 #include <atomic>
 #include <future>
 #include <thread>
+#include <type_traits>
 #include <vector>
 
 #include "common.h"
@@ -63,10 +64,10 @@ template <typename T>
 class ThreadPoolWait: public BaseThreadPool<T> {
 public:
     template<typename FunctionType>
-    std::future<typename std::result_of<FunctionType()>::type>
+    std::future<typename std::invoke_result<FunctionType()>::type>
     submit(FunctionType f) {
-        typedef typename std::result_of<FunctionType()>::type result_type;
-        std::packaged_task<result_type()> task(std::move(f));
+        typedef typename std::invoke_result<FunctionType()>::type result_type;
+        std::packaged_task<result_type> task(std::move(f));
         std::future<result_type> res(task.get_future());
         this->work_queue.push(std::move(task));
         return res;
@@ -92,7 +93,7 @@ private:
 protected:
     void worker_thread() override {
         local_work_queue.reset(new local_queue_type);
-        
+
         while(!this->done) {
             run_pending_task();
         }
@@ -100,10 +101,10 @@ protected:
 
 public:
     template<typename FunctionType>
-    std::future<typename std::result_of<FunctionType()>::type>
+    std::future<typename std::invoke_result<FunctionType()>::type>
     submit(FunctionType f) {
-        typedef typename std::result_of<FunctionType()>::type result_type;
-        
+        typedef typename std::invoke_result<FunctionType()>::type result_type;
+
         std::packaged_task<result_type()> task(f);
         std::future<result_type> res(task.get_future());
         if(local_work_queue) {
@@ -131,4 +132,3 @@ public:
 // define the static member variable
 template <typename T>
 thread_local std::unique_ptr<std::queue<T>> ThreadPoolWaitLocalQueue<T>::local_work_queue=nullptr;
-

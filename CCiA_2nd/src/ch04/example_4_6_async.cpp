@@ -1,25 +1,43 @@
 #include <iostream>
 #include <future>
 #include <string>
+#ifndef __APPLE__
 #include <syncstream>
+#endif
 #include <thread>
 
 void printing() {
+#ifndef __APPLE__
 	std::osyncstream(std::cout) << "printing runs on tid: " << std::this_thread::get_id() << std::endl;
+#else
+	std::cout << "printing runs on tid: " << std::this_thread::get_id() << std::endl;
+#endif
 }
 
 int addition(int x, int y) {
+#ifndef __APPLE__
 	std::osyncstream(std::cout) << "addition runs on tid: " << std::this_thread::get_id() << std::endl;
+#else
+	std::cout << "addition runs on tid: " << std::this_thread::get_id() << std::endl;
+#endif
 	return x + y;
 }
 
 int substract(int x, int y) {
+#ifndef __APPLE__
 	std::osyncstream(std::cout) << "substract runs on tid: " << std::this_thread::get_id() << std::endl;
+#else
+	std::cout << "substract runs on tid: " << std::this_thread::get_id() << std::endl;
+#endif
 	return x - y;
 }
 
 int main() {
+#ifndef __APPLE__
 	std::osyncstream(std::cout) << "main thread id: " << std::this_thread::get_id() << std::endl;
+#else
+	std::cout << "main thread id: " << std::this_thread::get_id() << std::endl;
+#endif
 
 	int x = 100;
 	int y = 50;

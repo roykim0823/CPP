@@ -39,7 +39,7 @@ T parallel_accumulate(Iterator first,Iterator last,T init)
         Iterator block_end=block_start;
         std::advance(block_end,block_size);
         //futures[i] = pool.submit([=] { accumulate_block<Iterator,T>() (block_start, block_end);} );
-        futures[i] = pool.submit(std::bind(accumulate_block<Iterator, T>(), block_start, block_end));
+        futures[i] = std::move(pool.submit(std::bind(accumulate_block<Iterator, T>(), block_start, block_end)));
         block_start=block_end;
     }
     T last_result=accumulate_block<int*, int>()(block_start,last);

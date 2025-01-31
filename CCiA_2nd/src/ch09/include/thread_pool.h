@@ -10,7 +10,7 @@
 // Listing 9.8 A thread pool that uses work stealing
 class ThreadPool {
     typedef function_wrapper task_type;
-    
+
     std::atomic_bool done;
     threadsafe_queue<task_type> pool_work_queue;
     std::vector<std::unique_ptr<work_stealing_queue> > queues;
@@ -19,7 +19,7 @@ class ThreadPool {
 
     static thread_local work_stealing_queue* local_work_queue;
     static thread_local unsigned my_index;
-   
+
     void worker_thread(unsigned my_index_) {
         my_index=my_index_;
         local_work_queue=queues[my_index].get();
@@ -43,7 +43,7 @@ class ThreadPool {
                 return true;
             }
         }
-        
+
         return false;
     }
 
@@ -65,16 +65,16 @@ public:
             throw;
         }
     }
-    
+
     ~ThreadPool() {
         done=true;
     }
 
     template<typename FunctionType>
-    std::future<typename std::result_of<FunctionType()>::type>
+    std::future<typename std::invoke_result<FunctionType()>::type>
     submit(FunctionType f) {
-        typedef typename std::result_of<FunctionType()>::type result_type;
-        
+        typedef typename std::invoke_result<FunctionType()>::type result_type;
+
         std::packaged_task<result_type()> task(f);
         std::future<result_type> res(task.get_future());
         if(local_work_queue) {

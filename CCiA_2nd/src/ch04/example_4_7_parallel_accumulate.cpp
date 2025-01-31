@@ -2,7 +2,9 @@
 #include <future>
 #include <numeric>
 #include <vector>
+#ifndef __APPLE__
 #include <syncstream>
+#endif
 #include <thread>
 
 int MIN_ELEMENT_COUNT = 1000;
@@ -14,7 +16,11 @@ int parallal_accumulate(iterator begin, iterator end) {
 	//atleast runs 1000 element
 	if (length <= MIN_ELEMENT_COUNT)
 	{
+#ifndef __APPLE__
 		std::osyncstream(std::cout) << std::this_thread::get_id() << std::endl;
+#else
+		std::cout << std::this_thread::get_id() << std::endl;
+#endif
 		return std::accumulate(begin, end, 0);
 	}
 
