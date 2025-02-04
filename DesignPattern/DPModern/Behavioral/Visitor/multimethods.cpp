@@ -16,6 +16,7 @@ struct GameObject
 	virtual void collide(GameObject& other) { ::collide(*this, other); }
 };
 
+// CRTP
 template <typename T> struct GameObjectImpl : GameObject
 {
 	type_index type() const override
@@ -27,6 +28,7 @@ template <typename T> struct GameObjectImpl : GameObject
 struct Planet : GameObjectImpl<Planet> {};
 struct Asteroid : GameObjectImpl<Asteroid> {};
 struct Spaceship : GameObjectImpl<Spaceship> {};
+
 struct ArmedSpaceship : Spaceship
 {
 	type_index type() const override {
@@ -61,7 +63,7 @@ void collide(GameObject& first, GameObject& second)
 	it->second();
 }
 
-int main__(int argc, char* argv[])
+int main(int argc, char* argv[])
 {
 	ArmedSpaceship spaceship;
 	Asteroid asteroid;
