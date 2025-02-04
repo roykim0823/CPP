@@ -17,7 +17,7 @@ class Person {
   private:
     std::string name;
   public:
-    Person(const char* n) 
+    Person(const char* n)
      : name{n} {
     }
 
@@ -30,6 +30,8 @@ class Person {
      : name{p.name} {
         std::cout << "COPY " << name << '\n';
     }
+
+    // It is not called since noexcept(std::cout << name) is false
     Person(Person&& p) noexcept(std::is_nothrow_move_constructible<std::string>::value
                                  && noexcept(std::cout << name))
      : name{std::move(p.name)} {
@@ -37,4 +39,3 @@ class Person {
     }
     //...
 };
-

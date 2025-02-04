@@ -19,8 +19,8 @@ template<typename Coll, typename T>
 void insertBoth(Coll& coll, T&& p)
 {
   // if p has move semantics, move a value but copy reference/static members
-  coll.push_back(std::forward<T>(p).first);  
-  coll.push_back(std::forward<T>(p).second); 
+  coll.push_back(std::forward<T>(p).first);
+  coll.push_back(std::forward<T>(p).second);
 }
 
 int main()
@@ -42,10 +42,9 @@ int main()
   insertBoth(coll, std::move(p2));   // does move value and copy reference member
   std::cout << "p2.first:  " << p2.first << '\n';
   std::cout << "p2.second: " << p2.second << '\n';
-   
+
   std::cout << "coll:\n";
   for (const auto& elem : coll) {
      std::cout << "- elem: " << elem << '\n';
   }
 }
-

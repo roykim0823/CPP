@@ -28,10 +28,10 @@ int main()
              });
 
     // OOPS: move tasks:
+    // ts has no objects to join, but the numThreads is 2.
     Tasks other{std::move(ts)};
   }
   catch (const std::exception& e) {
     std::cerr << "EXCEPTION: " << e.what() << std::endl;
   }
 }
-

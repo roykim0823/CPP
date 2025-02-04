@@ -24,6 +24,19 @@ void print(const Card& c)
             << val.substr(pos+4) << '\n';
 }
 
+void print_fix(const Card& c)
+{
+  std::string val{c.getValue()};
+  auto pos = val.find("-of-");
+  auto p2 = pos + 4;
+  if (pos != std::string::npos) {
+    std::cout << val.substr(0, pos) << ' '
+              << val.substr(pos+4) << '\n';
+  } else {
+    std::cout << "no value\n";
+  }
+}
+
 int main()
 {
   std::vector<Card> deck;
@@ -36,13 +49,15 @@ int main()
   }
 
   for (const auto& c : deck) {
-    std::cout << c << '\n'; 
+    std::cout << c << '\n';
   }
   print(deck[0]);                   // passing a valid object
 
-  Card c{std::move(deck[0])};       // deck[0] has invalid state 
-  print(deck[0]);                   // passing an object with broken invariant
+  std::cout << "Move card deck." << std::endl;
+
+  Card c{std::move(deck[0])};       // deck[0] has invalid state
+  print_fix(deck[0]);                   // passing an object with broken invariant
+
   deck[0] = Card{"ace-of-hearts"};  // deck[0] is valid again
   print(deck[0]);                   // passing a valid object
 }
-

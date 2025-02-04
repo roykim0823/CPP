@@ -20,7 +20,7 @@ class SharedInt {
     inline static std::shared_ptr<int> movedFromValue{std::make_shared<int>(0)};
 
   public:
-    explicit SharedInt(int val) 
+    explicit SharedInt(int val)
      : sp{std::make_shared<int>(val)} {
     }
 
@@ -29,9 +29,9 @@ class SharedInt {
     }
 
     // fix moving special member functions:
-    SharedInt (SharedInt&& si) 
+    SharedInt (SharedInt&& si)
      : sp{std::move(si.sp)} {
-        si.sp = movedFromValue;
+        si.sp = movedFromValue;  // copy the special value for the moved one
     }
     SharedInt& operator= (SharedInt&& si) noexcept {
       if (this != &si) {
@@ -45,4 +45,3 @@ class SharedInt {
     SharedInt (const SharedInt&) = default;
     SharedInt& operator= (const SharedInt&) = default;
 };
-
