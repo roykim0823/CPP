@@ -37,11 +37,10 @@ int main()
   std::cout << "s:   " << s << '\n';
   std::cout << "ref: " << ref << '\n';
 
-  auto str = std::move(ref);                   // move value from s and ref to str
+  auto str = std::move(ref);                   // move value from s and ref to str (string::std, not string::std&&)
   std::cout << "s: "   << s << '\n';
   std::cout << "ref: " << ref << '\n';
   std::cout << "str: " << str << '\n';
 
   call(print, std::cout, str) << '\n';         // call() returns reference to std::cout
 }
-

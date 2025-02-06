@@ -35,6 +35,12 @@ std::string&& computeRRef(std::string&& str) {
 std::string computeValue(const std::string& str) {
   return str;
 }
+const std::string computeConstValue(const std::string& str) {
+  return str;
+}
+const std::string&& computeConstRRef(const std::string&& str) {
+  return std::move(str);
+}
 
 int main()
 {
@@ -47,5 +53,8 @@ int main()
   process(computeRRef(std::move(str)));  // calls process(std::string&&)
 
   process(computeValue("tmp"));          // calls process(std::string&&)
-}
 
+  // disable move semantics
+  process(computeConstValue("tmp"));
+  process(computeConstRRef("tmp"));
+}

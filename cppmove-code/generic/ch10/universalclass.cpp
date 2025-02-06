@@ -22,7 +22,7 @@ class Coll {
   Coll() = default;
 
   // function in class template:
-  void insert(T&& val) {
+  void insert(T&& val) {  // val is not a universal reference
     values.push_back(std::move(val));
   }
 };
@@ -30,11 +30,10 @@ class Coll {
 int main()
 {
   Coll<std::string> coll;
-  //... 
+  //...
   coll.insert(std::string{"prvalue"});  // OK
   std::string str{"lvalue"};
   coll.insert(str);              // ERROR: T&& of Coll<T> is not a universal reference
   coll.insert(std::move(str));   // OK
-  //... 
+  //...
 }
-
