@@ -15,6 +15,8 @@
 #include <string_view>
 #include <concepts>
 
+// clang++ -std=c++20
+
 // require a universal reference of a specific type:
 // - no implicit type conversions supported
 template<typename T>

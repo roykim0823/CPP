@@ -26,7 +26,7 @@ void iterate(std::string::const_iterator beg, std::string::const_iterator end)
 template<typename T>
 void process(T&& coll)
 {
-  iterate(coll.begin(), coll.end());
+  iterate(coll.begin(), coll.end());  // coll is not perfect forwarding!
 }
 
 int main()
