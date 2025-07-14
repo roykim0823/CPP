@@ -28,7 +28,7 @@ int parallal_accumulate(iterator begin, iterator end) {
 	std::advance(mid, (length + 1) / 2);
 
 	//recursive all to parallel_accumulate
-	std::future<int> f1 = std::async(std::launch::deferred | std::launch::async,
+	std::future<int> f1 = std::async(std::launch::deferred | std::launch::async,  // avoid the overuse of threads
 		parallal_accumulate<iterator>, mid, end);
 	auto sum = parallal_accumulate(begin, mid);
 	return sum + f1.get();
