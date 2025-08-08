@@ -29,10 +29,9 @@ class Tasks {
   //...
 
   // at the end wait for all started threads:
-  ~Tasks() {
+  ~Tasks() {  // destructor disabled move semantics
     for (int i = 0; i < numThreads; ++i) {
       threads[i].join();
     }
   }
 };
-

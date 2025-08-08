@@ -39,7 +39,7 @@ int main()
   std::cout << "p1.first:  " << p1.first << '\n';
   std::cout << "p1.second: " << p1.second << '\n';
 
-  insertBoth(coll, std::move(p2));   // does move value and copy reference member
+  insertBoth(coll, std::move(p2));   // does move value and copy reference member!
   std::cout << "p2.first:  " << p2.first << '\n';
   std::cout << "p2.second: " << p2.second << '\n';
 

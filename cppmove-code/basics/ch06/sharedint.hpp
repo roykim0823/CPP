@@ -12,6 +12,7 @@
 
 #include <memory>
 #include <string>
+#include <iostream>
 
 class SharedInt {
   private:
@@ -29,19 +30,20 @@ class SharedInt {
     }
 
     // fix moving special member functions:
-    SharedInt (SharedInt&& si)
-     : sp{std::move(si.sp)} {
-        si.sp = movedFromValue;  // copy the special value for the moved one
-    }
-    SharedInt& operator= (SharedInt&& si) noexcept {
-      if (this != &si) {
-        sp = std::move(si.sp);
-        si.sp = movedFromValue;
-      }
-      return *this;
-    }
+    // SharedInt (SharedInt&& si)
+    //  : sp{std::move(si.sp)} {
+    //     //std::cout << "MOVE" << std::endl;
+    //     si.sp = movedFromValue;  // copy the special value for the moved one
+    // }
+    // SharedInt& operator= (SharedInt&& si) noexcept {
+    //   if (this != &si) {
+    //     sp = std::move(si.sp);
+    //     si.sp = movedFromValue;
+    //   }
+    //   return *this;
+    // }
 
     // enable copying (deleted with user-declared move operations):
-    SharedInt (const SharedInt&) = default;
-    SharedInt& operator= (const SharedInt&) = default;
+    // SharedInt (const SharedInt&) = default;
+    // SharedInt& operator= (const SharedInt&) = default;
 };

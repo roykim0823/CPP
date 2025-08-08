@@ -26,9 +26,15 @@ class IntString
       val = i;
       sval = std::to_string(i);
     }
+    // try to fix the possible wrong move semantics?
+    // IntString& operator=(IntString&& int_str) {
+    //   val = int_str.val;
+    //   sval=std::move(int_str.sval);
+    //   int_str.setValue(-1);
+    //   return *this;
+    // }
     //...
     void dump() const {
       std::cout << " [" << val << "/'" << sval << "']\n";
     }
 };
-

@@ -56,6 +56,7 @@ int main()
   std::cout << "Move card deck." << std::endl;
 
   Card c{std::move(deck[0])};       // deck[0] has invalid state
+  // print(deck[0]);                // std::out_of_range
   print_fix(deck[0]);                   // passing an object with broken invariant
 
   deck[0] = Card{"ace-of-hearts"};  // deck[0] is valid again

@@ -25,13 +25,13 @@ struct Str
    : val(100, 'a') {   // don't use braces here
   }
 
-  // enable copying:
-  Str(const Str&) = default;
+  // // enable copying:
+  // Str(const Str&) = default;
 
-  // enable moving (with and without noexcept):
-  Str (Str&& s) NOEXCEPT
-   : val{std::move(s.val)} {
-  }
+  // // enable moving (with and without noexcept):
+  // Str (Str&& s) NOEXCEPT
+  //  : val{std::move(s.val)} {
+  // }
 };
 
 int main()

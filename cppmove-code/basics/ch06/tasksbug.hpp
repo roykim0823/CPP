@@ -35,8 +35,8 @@ class Tasks {
   // at the end wait for all started threads:
   ~Tasks() {
     for (int i = 0; i < numThreads; ++i) {
+      if (threads[i].joinable())  // bug fix method 1)
       threads[i].join();
     }
   }
 };
-

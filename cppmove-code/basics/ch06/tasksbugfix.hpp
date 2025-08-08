@@ -28,13 +28,13 @@ class Tasks {
   }
   //...
 
-  Tasks(Tasks&& task) {
+  Tasks(Tasks&& task) {  // fix method 2)
     threads = std::move(task.threads);
     numThreads = task.numThreads;
     task.numThreads = 0;  // reset the task's numthread to avoid double join in the destructor.
   }
 
-  Tasks& operator=(Tasks&& task) {
+  Tasks& operator=(Tasks&& task) {  // fix method 2)
     // wait for join (or detach?) to assign new threads.
     for (int i = 0; i < numThreads; ++i) {
       threads[i].join();
@@ -48,7 +48,9 @@ class Tasks {
   // at the end wait for all started threads:
   ~Tasks() {
     for (int i = 0; i < numThreads; ++i) {
-      threads[i].join();
+      if(threads[i].joinable()) {  // fix method 1)
+        threads[i].join();
+      }
     }
   }
 };
