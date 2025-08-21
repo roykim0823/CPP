@@ -26,7 +26,7 @@ class X {
   template<typename T>
   X(T&&) {
     std::cout << "universal constructor\n";
-  }  
+  }
 };
 
 int main()
@@ -39,4 +39,3 @@ int main()
   X xvm{std::move(xv)};  // OK: calls move constructor
   X xcm{std::move(xc)};  // OOPS: calls universal constructor
 }
-

@@ -23,11 +23,18 @@ void iterate(std::string::const_iterator beg, std::string::const_iterator end)
   std::cout << "do some const stuff with the passed range\n";
 }
 
+// template<typename T>
+// void process(T&& coll)
+// {
+//   iterate(coll.begin(), coll.end());  // coll is not perfect forwarding!
+// }
+
 template<typename T>
 void process(T&& coll)
 {
-  iterate(coll.begin(), coll.end());  // coll is not perfect forwarding!
+  iterate(std::forward<T>(coll).begin(), std::forward<T>(coll).end());  // coll is not perfect forwarding!
 }
+
 
 int main()
 {
@@ -40,4 +47,3 @@ int main()
   process(std::move(v));      // coll binds to a non-const xvalue, iterators passed
   process(std::move(c));      // coll binds to a const xvalue , const_iterators passed
 }
-

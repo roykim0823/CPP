@@ -33,7 +33,7 @@ int main()
   //...
   coll.insert(std::string{"prvalue"});  // OK
   std::string str{"lvalue"};
-  coll.insert(str);              // ERROR: T&& of Coll<T> is not a universal reference
+  // coll.insert(str);              // ERROR: T&& of Coll<T> is not a universal reference
   coll.insert(std::move(str));   // OK
   //...
 }

@@ -4,7 +4,7 @@ project(CCiA CXX)
 set(CMAKE_CXX_FLAGS "-std=c++20")
 
 set(CXX_FLAGS
- -g
+
  # -DVALGRIND
  # -DCHECK_PTHREAD_RETURN_VALUE
  # -D_FILE_OFFSET_BITS=64
