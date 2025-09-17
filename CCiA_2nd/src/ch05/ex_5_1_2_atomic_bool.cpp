@@ -29,7 +29,7 @@ void run_code2() {
     x.store(y);
     std::cout << "value of the atomic bool y - " << y.load() << std::endl;
 
-    bool z = x.exchange(false);
+    bool z = x.exchange(false);  // exchange return the old value and set the new value.
     std::cout << "current value of atomic bool x - " << x.load() << std::endl;
     std::cout << "previous value of atomic bool x - " << z << std::endl;
 }

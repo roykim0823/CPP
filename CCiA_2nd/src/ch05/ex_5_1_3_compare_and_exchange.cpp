@@ -6,7 +6,7 @@ void run_code(int expected_value) {
     std::atomic<int> x(20);
 
     std::cout << "previous expected value - " << expected_value << std::endl;
-    bool return_val = x.compare_exchange_weak(expected_value, 6);  // no gurantee to exchange
+    bool return_val = x.compare_exchange_weak(expected_value, 6);  // no gurantee to exchange even if the atomic value is same as the expected value
 
     std::cout << "operation successful    - " << (return_val ? "yes" : "no") << std::endl;
     std::cout << "current expected value  - " << expected_value << std::endl;
@@ -17,7 +17,7 @@ void run_code2(int expected_value) {
     std::atomic<int> x(20);
 
     std::cout << "previous expected value - " << expected_value << std::endl;
-    bool return_val = x.compare_exchange_strong(expected_value, 6);  // no gurantee to exchange
+    bool return_val = x.compare_exchange_strong(expected_value, 6);  // gurantee to exchange if the atomic value is same as the expected value
 
     std::cout << "operation successful    - " << (return_val ? "yes" : "no") << std::endl;
     std::cout << "current expected value  - " << expected_value << std::endl;

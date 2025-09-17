@@ -49,9 +49,10 @@ void print(read_values* v) {
 }
 
 int main() {
-    std::thread t1(increment,&x,values1);
-    std::thread t2(increment,&y,values2);
-    std::thread t3(increment,&z,values3);
+    // except the first argument, gurantted the order is value[i] <= value[i+1] (equal or larger then previous one)
+    std::thread t1(increment,&x,values1);  // increase x, only the order of x is guranttes
+    std::thread t2(increment,&y,values2);  // increase y
+    std::thread t3(increment,&z,values3);  // increase z
     std::thread t4(read_vals,values4);
     std::thread t5(read_vals,values5);
     go=true;
