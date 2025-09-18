@@ -19,6 +19,10 @@ void run_code2(int expected_value) {
     std::cout << "previous expected value - " << expected_value << std::endl;
     bool return_val = x.compare_exchange_strong(expected_value, 6);  // gurantee to exchange if the atomic value is same as the expected value
 
+    // Convert the strong CAS to a weak one.
+    // int expected = expected_value;
+    // while(!x.compare_exchange_weak(expected, 6) && expected == expected_value);
+
     std::cout << "operation successful    - " << (return_val ? "yes" : "no") << std::endl;
     std::cout << "current expected value  - " << expected_value << std::endl;
     std::cout << "current x               - " << x.load() << std::endl;
@@ -30,6 +34,6 @@ int main() {
     std::cout << std::endl;
     run_code2(20);
     run_code2(10);
-    
+
     return 0;
 }

@@ -1,5 +1,6 @@
 #include <atomic>
 #include <thread>
+#include <iostream>
 #include <assert.h>
 
 std::atomic<bool> x,y;
@@ -43,5 +44,8 @@ int main()
     c.join();
     d.join();
     // acquire_release doesn't imply a total ordering
-    assert(z.load()!=0);  // no gurantee, no order between two threads: write_x() and write_y()
+    //assert(z.load()!=0);  // no gurantee, no order between two threads: write_x() and write_y()
+
+    int z_val = z.load();
+    std::cout << z_val << std::endl;
 }

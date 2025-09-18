@@ -33,8 +33,8 @@ void consume_queue_items()  // read
         if((item_index = count.fetch_sub(1,std::memory_order_acquire))<=0)
         {
             wait_for_more_items();
-            //continue;
-            break;  // to end the execution when the count becomes 0
+            continue;
+            //break;  // to end the execution when the count becomes 0
         }
         process(queue_data[item_index-1]);  // reading queue is safe
     }

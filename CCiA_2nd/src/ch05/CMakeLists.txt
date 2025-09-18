@@ -1,5 +1,3 @@
-#add_library(ch05 listing_5.1.cpp)
-
 add_executable(listing_5.1_spin_lock listing_5.1_spin_lock.cpp)
 target_link_libraries(listing_5.1_spin_lock pthread)
 
@@ -17,6 +15,9 @@ target_link_libraries(listing_5.5_relaxed pthread)
 
 add_executable(listing_5.6_relaxed_multi_threads listing_5.6_relaxed_multi_threads.cpp)
 target_link_libraries(listing_5.6_relaxed_multi_threads pthread)
+
+add_executable(listing_5.6_1_multi_threads listing_5.6_1_multi_threads.cpp)
+target_link_libraries(listing_5.6_1_multi_threads pthread)
 
 add_executable(listing_5.7_acquire_release listing_5.7_acquire_release.cpp)
 target_link_libraries(listing_5.7_acquire_release pthread)
@@ -47,3 +48,6 @@ target_link_libraries(ex_5_1_2_atomic_bool pthread)
 
 add_executable(ex_5_1_3_compare_and_exchange ex_5_1_3_compare_and_exchange.cpp)
 target_link_libraries(ex_5_1_3_compare_and_exchange pthread)
+
+add_executable(ex_5_1_4_atomic_pointers ex_5_1_4_atomic_pointers.cpp)
+target_link_libraries(ex_5_1_4_atomic_pointers pthread)

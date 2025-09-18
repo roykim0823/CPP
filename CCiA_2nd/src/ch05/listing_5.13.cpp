@@ -30,5 +30,5 @@ int main()
     std::thread b(read_y_then_x);
     a.join();
     b.join();
-    assert(z.load()!=0);
+    assert(z.load()!=0);  // This assert won't fire
 }

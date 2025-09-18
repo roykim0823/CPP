@@ -10,10 +10,10 @@ void run_code(std::atomic_flag& flag) {
 }
 
 int main() {
-    // std::atomic_flag flag1 = true;  // may cause compilation error
+    std::atomic_flag flag1 = true;  // may cause compilation error, not on mac
     std::atomic_flag flag2 = ATOMIC_FLAG_INIT;
 
-    // run_code(flag1);
+    run_code(flag1);
     run_code(flag2);
 
     return 0;

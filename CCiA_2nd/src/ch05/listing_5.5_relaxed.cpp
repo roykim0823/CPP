@@ -1,5 +1,6 @@
 #include <atomic>
 #include <thread>
+#include <iostream>
 #include <assert.h>
 
 std::atomic<bool> x,y;
@@ -27,5 +28,7 @@ int main()
     std::thread b(read_y_then_x);
     a.join();
     b.join();
-    assert(z.load()!=0);  // No gurantee z.load()!=0
+    //assert(z.load()!=0);  // No gurantee z.load()!=0
+    int z_val = z.load();
+    std::cout << z_val << std::endl;
 }
