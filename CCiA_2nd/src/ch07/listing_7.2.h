@@ -16,8 +16,8 @@ private:
 public:
     void push(T const& data)
     {
-        node* const new_node=new node(data);
-        new_node->next=head.load();
-        while(!head.compare_exchange_weak(new_node->next,new_node));
+        node* const new_node = new node(data);
+        new_node->next = head.load();
+        while(!head.compare_exchange_weak(new_node->next, new_node));
     }
 };
