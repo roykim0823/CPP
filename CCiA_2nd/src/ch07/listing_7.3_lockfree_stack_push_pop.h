@@ -27,7 +27,7 @@ public:
         while(!head.compare_exchange_weak(new_node->next, new_node));
     }
 
-    std::shared_ptr<T> pop()
+    std::shared_ptr<T> pop()  // There are memory leaks...
     {
         // Not thread safe implementation
         // node *old_head = head;

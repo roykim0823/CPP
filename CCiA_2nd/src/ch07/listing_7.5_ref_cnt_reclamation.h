@@ -14,44 +14,40 @@ private:
             nodes=next;
         }
     }
-    void try_reclaim(node* old_head)
-    {
-        if(threads_in_pop==1)
-        {
-            node* nodes_to_delete=to_be_deleted.exchange(nullptr);
-            if(!--threads_in_pop)
-            {
+
+    void try_reclaim(node* old_head) {
+        if(threads_in_pop==1) {
+            // delete node pointed by old_head
+            node* nodes_to_delete = to_be_deleted.exchange(nullptr);
+
+            if(!--threads_in_pop) {  // only one thread at pop()
                 delete_nodes(nodes_to_delete);
-            }
-            else if(nodes_to_delete)
-            {
+            } else if(nodes_to_delete) {
                 chain_pending_nodes(nodes_to_delete);
             }
             delete old_head;
-        }
-        else
-        {
+        } else {
+            // add node pointed by old_head to the to_be_deleted list
             chain_pending_node(old_head);
             --threads_in_pop;
         }
     }
-    void chain_pending_nodes(node* nodes)
-    {
-        node* last=nodes;
-        while(node* const next=last->next)
-        {
+
+    void chain_pending_nodes(node* nodes) {
+        node* last = nodes;
+        while(node* const next=last->next) {
             last=next;
         }
-        chain_pending_nodes(nodes,last);
+        chain_pending_nodes(nodes, last);
     }
-    void chain_pending_nodes(node* first,node* last)
-    {
-        last->next=to_be_deleted;
+
+    void chain_pending_nodes(node* first,node* last) {
+        last->next = to_be_deleted;
         while(!to_be_deleted.compare_exchange_weak(
-                  last->next,first));
+                  last->next, first));
     }
-    void chain_pending_node(node* n)
-    {
+
+    void chain_pending_node(node* n) {
         chain_pending_nodes(n,n);
     }
 };
