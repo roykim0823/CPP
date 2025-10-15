@@ -5,7 +5,7 @@
 #include <thread>
 #include "simple_thread_pool.h"
 
-// Listing 9.3 parallel_accumulate using a thread pool with waitable tasks
+
 template<typename Iterator, typename T>
 struct accumulate_block
 {
@@ -18,7 +18,7 @@ struct accumulate_block
 };
 
 
-// From listing_9.3.cpp
+// Listing 9.3 parallel_accumulate using a thread pool with waitable tasks
 template<typename Iterator,typename T>
 T parallel_accumulate(Iterator first,Iterator last,T init)
 {

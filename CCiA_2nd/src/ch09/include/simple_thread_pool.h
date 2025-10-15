@@ -59,10 +59,11 @@ public:
 };
 
 
-// Listing 9.2 A thread pool with waitable task
+
 template <typename T>
 class ThreadPoolWait: public BaseThreadPool<T> {
 public:
+    // Listing 9.2 A thread pool with waitable task (wait for the result)
     template<typename FunctionType>
     std::future<typename std::invoke_result<FunctionType()>::type>
     submit(FunctionType f) {
@@ -70,7 +71,7 @@ public:
         std::packaged_task<result_type> task(std::move(f));
         std::future<result_type> res(task.get_future());
         this->work_queue.push(std::move(task));
-        return res;
+        return res;  // return the future -> .get() waits for the result
     }
 
     // Listing 9.4 An implementation of run_pending_task()
