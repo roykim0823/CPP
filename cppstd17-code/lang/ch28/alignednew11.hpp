@@ -15,7 +15,8 @@
 #if __STDC_VERSION >= 201112L
 #include <stdlib.h>  // for aligned_alloc()
 #else
-#include <malloc.h>  // for _aligned_malloc() or memalign()
+//#include <malloc.h>  // for _aligned_malloc() or memalign()
+#include <cstdlib>  // for mac
 #endif
 
 struct alignas(32) MyType32 {
@@ -34,7 +35,8 @@ struct alignas(32) MyType32 {
       return _aligned_malloc(size, alignof(MyType32));
 #else
       // use API of Linux:
-      return memalign(alignof(MyType32), size);
+      //return memalign(alignof(MyType32), size);
+      return aligned_alloc(alignof(MyType32), size);
 #endif
 #endif
   }
@@ -56,4 +58,3 @@ struct alignas(32) MyType32 {
   //...
   // also for arrays (new[] and delete[])
 };
-

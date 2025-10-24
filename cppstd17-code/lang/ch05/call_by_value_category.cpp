@@ -9,25 +9,25 @@
 //  http://creativecommons.org/licenses/by/4.0/
 //********************************************************
 
-
 #include <iostream>
 
-template<typename T>
-void call(T op1, T op2)
-{
-  op1();
-  op2();
+class X {};
+
+void f(const X&) {
+  std::cout << "f(const X&) is called." << std::endl;
 }
 
-void f1() {
-  std::cout << "f1()\n";
-}
-void f2() noexcept {
-  std::cout << "f2()\n";
+void f(X&&) {
+  std::cout << "f(X&&) is called." << std::endl;
 }
 
-int main()
-{
-  call(f1, f2);  // ERROR since C++17
-}
+int main() {
+  X v;
+  const X c;
+  f(v);
+  f(c);
+  f(X());
+  f(std::move(v));
 
+  return 0;
+}

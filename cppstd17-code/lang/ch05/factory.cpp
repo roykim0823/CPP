@@ -9,22 +9,13 @@
 //  http://creativecommons.org/licenses/by/4.0/
 //********************************************************
 
-
-struct Derived;
-
-struct Base {
- friend struct Derived;
- private: 
-  Base() {
-  }
-};
-
-struct Derived : Base {
-};
+#include "factory.hpp"
+#include <memory>
+#include <atomic>
 
 int main()
 {
-  Derived d1{};    // ERROR since C++17
-  Derived d2;      // still OK (but might not initialize)
+  int i = create<int>(42);
+  std::unique_ptr<int> up = create<std::unique_ptr<int>>(new int{42});
+  std::atomic<int> ai = create<std::atomic<int>>(42);  // works by copy eolision without copy/move
 }
-

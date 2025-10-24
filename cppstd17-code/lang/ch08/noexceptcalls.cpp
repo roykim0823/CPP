@@ -9,13 +9,24 @@
 //  http://creativecommons.org/licenses/by/4.0/
 //********************************************************
 
-#include "factory.hpp"
-#include <memory>
-#include <atomic>
+
+#include <iostream>
+
+template<typename T>
+void call(T op1, T op2)
+{
+  op1();
+  op2();
+}
+
+void f1() {
+  std::cout << "f1()\n";
+}
+void f2() noexcept {
+  std::cout << "f2()\n";
+}
 
 int main()
 {
-  int i = create<int>(42);
-  std::unique_ptr<int> up = create<std::unique_ptr<int>>(new int{42});
-  std::atomic<int> ai = create<std::atomic<int>>(42);
+  //call(f1, f2);  // ERROR since C++17
 }
