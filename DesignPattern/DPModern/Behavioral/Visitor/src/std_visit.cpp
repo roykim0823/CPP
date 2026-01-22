@@ -17,11 +17,13 @@ struct AddressPrinter
 int main(int ac, char* av[])
 {
   variant<string, int> house;
-  //house = "Montefiore Castle";
   house = 221;
 
   AddressPrinter ap;
   std::visit(ap, house);
+  variant<string, int> house2;
+  house2 = "Montefiore Castle";
+  std::visit(ap, house2);
 
   // what if you want to create a visitor in-place?
   std::visit([](auto& arg) {
