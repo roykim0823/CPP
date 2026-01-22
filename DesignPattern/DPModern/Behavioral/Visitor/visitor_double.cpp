@@ -24,6 +24,7 @@ struct ExpressionPrinter : ExpressionVisitor
   void visit(SubtractionExpression* se) override;
 };
 
+// Visitor make the interface easily expandable, keeps OCP
 struct ExpressionEvaluator : ExpressionVisitor
 {
   double result;
@@ -47,7 +48,7 @@ struct DoubleExpression : Expression
 
   void accept(ExpressionVisitor* visitor) override
   {
-    visitor->visit(this);
+    visitor->visit(this);  // this pointer delivers the type information!
   }
 };
 
@@ -140,6 +141,7 @@ void ExpressionEvaluator::visit(SubtractionExpression* se)
 
 int main()
 {
+  // (1 + (2 - 3))
   auto e = new AdditionExpression{
     new DoubleExpression{ 1 },
     new SubtractionExpression {
@@ -147,7 +149,8 @@ int main()
       new DoubleExpression{ 3 }
     }
   };
-  ostringstream oss;
+
+  // ostringstream oss;
   ExpressionPrinter printer;
   ExpressionEvaluator evaluator;
   printer.visit(e);

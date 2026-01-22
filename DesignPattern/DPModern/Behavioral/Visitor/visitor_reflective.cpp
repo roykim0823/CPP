@@ -32,6 +32,7 @@ struct AdditionExpression : Expression
 
 struct ExpressionPrinter
 {
+  // Not working, no way to determine the which expression is passed in the compile time
   /*void print(DoubleExpression *de, ostringstream& oss) const
   {
     oss << de->value;
@@ -49,12 +50,13 @@ struct ExpressionPrinter
 
   void print(Expression *e)
   {
-    if (auto de = dynamic_cast<DoubleExpression*>(e))  // downside1: dynamic_cast
-    {
+    // Downside one is the dynamic cast (runtime cost)
+    // Downside two is "what if we forget one of elemenets?"
+    // - there is a chance we might missed the new type since it is separate one.
+    // Downside three is long if-else clauses
+    if (auto de = dynamic_cast<DoubleExpression*>(e)) {
       oss << de->value;
-    } 
-    else if (auto ae = dynamic_cast<AdditionExpression*>(e))
-    {
+    } else if (auto ae = dynamic_cast<AdditionExpression*>(e)) {
       oss << "(";
       print(ae->left);
       oss << "+";
@@ -74,9 +76,11 @@ int main() {
       new DoubleExpression{ 3 }
     }
   };
-  ostringstream oss;
+  //ostringstream oss;  // method 1
   //e->print(oss);
-  ExpressionPrinter ep;
+  //cout << oss.str() << endl;
+
+  ExpressionPrinter ep;  // method 2
   ep.print(e);
   cout << ep.str() << endl;
 

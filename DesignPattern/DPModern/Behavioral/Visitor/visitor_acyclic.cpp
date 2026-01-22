@@ -64,9 +64,11 @@ struct AdditionExpression : Expression
   }
 };
 
+// The advantage of reflective visitor is that it can provide some flexibility such that
+// it works without Visitor<DoubleExpression> for example.
 struct ExpressionPrinter : VisitorBase,
                            //Visitor<Expression>,  // not required
-                           Visitor<DoubleExpression>,  // compile without Visitr<DoubleExpression>
+                           Visitor<DoubleExpression>,  // compile without Visitr<DoubleExpression> works
                            Visitor<AdditionExpression>
 {
   // can remove double visitor without failure
