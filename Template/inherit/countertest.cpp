@@ -14,4 +14,8 @@ int main()
             << MyString<char>::live() << '\n';
   std::cout << "num of MyString<wchar_t>: "
             << ws.live() << '\n';
+  std::cout << "num of MyString<wchar_t>:    "
+            << MyString<wchar_t>::live() << '\n';
+  std::cout << "num of MyString in s1: "
+            << s1.live() << '\n';
 }
